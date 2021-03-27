@@ -43,6 +43,10 @@ class LoginFragment : Fragment() {
             AuthFactory.login( user )
         }
 
+        registerButton.setOnClickListener {
+
+        }
+
 
 
     }
