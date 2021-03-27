@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "959385786473",
+    "project_id": "diplomado-22f3d",
+    "storage_bucket": "diplomado-22f3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959385786473:android:8f56175ca21537bf782af8",
+        "android_client_info": {
+          "package_name": "com.soyaaroncervantes.calmvet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959385786473-14051qa75j7q00jjlel6vlptrpnblqeu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSHhimlHyiz7qVpzGwmD3GvL_BErT018o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959385786473-14051qa75j7q00jjlel6vlptrpnblqeu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
