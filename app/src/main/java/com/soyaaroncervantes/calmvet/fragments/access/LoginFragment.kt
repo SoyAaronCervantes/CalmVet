@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.soyaaroncervantes.calmvet.R
-import com.soyaaroncervantes.calmvet.factory.auth.LoginFactory
-import com.soyaaroncervantes.calmvet.factory.auth.Provider
+import com.soyaaroncervantes.calmvet.factory.auth.AuthFactory
 
 class LoginFragment : Fragment() {
 
@@ -19,23 +18,32 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val registerButton: MaterialButton = view.findViewById( R.id.registerButton )
-
+        /** Social Media Buttons */
         val googleButton: MaterialButton = view.findViewById( R.id.googleButton )
         val facebookButton: MaterialButton = view.findViewById( R.id.facebookButton )
 
-        /** toDo Implement Factory Pattern for Login & Auth */
+        /** Register Button */
+        val registerButton: MaterialButton = view.findViewById( R.id.registerButton )
 
+        /** Submit Button */
+        val submitButton: MaterialButton = view.findViewById( R.id.submitButton )
+
+        submitButton.setOnClickListener {
+            val user = AuthFactory.FactoryParams.User("asd@asd.com", "asdqwe123");
+            AuthFactory.login( user )
+        }
 
         googleButton.setOnClickListener {
-            val provider = Provider.GOOGLE
-            LoginFactory.login( provider )
+            val user = AuthFactory.FactoryParams.Google
+            AuthFactory.login( user )
         }
 
         facebookButton.setOnClickListener {
-            val provider = Provider.FACEBOOK
-            LoginFactory.login( provider )
+            val user = AuthFactory.FactoryParams.Facebook
+            AuthFactory.login( user )
         }
+
+
 
     }
 
