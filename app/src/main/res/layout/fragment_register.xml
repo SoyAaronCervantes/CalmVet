@@ -8,7 +8,7 @@
     android:layout_margin="@dimen/container_margin"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".fragments.access.LoginFragment">
+    tools:context=".fragments.access.RegisterFragment">
 
     <TextView
       android:layout_width="match_parent"
