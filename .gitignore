@@ -299,5 +299,4 @@ app/src/main/res/nav_graph/
 firebase-debug.log
 firestore-debug.log
 ui-debug.log
-firestore.rules
 .firebaserc/
