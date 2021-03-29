@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "959385786473-6rthp71mn1ovdb84ndk334lr7vqvv5ov.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.soyaaroncervantes.calmvet",
+            "certificate_hash": "3f7c8f98f03a4830ff2ac9786e65a55e02b949d7"
+          }
+        },
+        {
           "client_id": "959385786473-14051qa75j7q00jjlel6vlptrpnblqeu.apps.googleusercontent.com",
           "client_type": 3
         }
