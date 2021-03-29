@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 
 import androidx.fragment.app.Fragment
@@ -12,7 +13,7 @@ import androidx.navigation.findNavController
 
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -20,11 +21,9 @@ import com.google.firebase.ktx.Firebase
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentLoginBinding
 import com.soyaaroncervantes.calmvet.factory.AuthFactory
-import com.soyaaroncervantes.calmvet.models.user.UserAccess
 
 class LoginFragment : Fragment() {
   private lateinit var firebaseAuth: FirebaseAuth
-  private lateinit var submitButton: MaterialButton
   private lateinit var binding: FragmentLoginBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,19 +61,31 @@ class LoginFragment : Fragment() {
     val emailInput: TextInputEditText = view.findViewById( R.id.emailInputEdit )
     val passwordInput: TextInputEditText = view.findViewById( R.id.passwordInputEdit )
 
+
     registerButton.setOnClickListener {
       it.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
     }
 
-    submitButton.setOnClickListener {
+    submitButton.setOnClickListener { viewElement ->
 
       val email = emailInput.text.toString()
       val password = passwordInput.text.toString()
 
       val user = AuthFactory.FactoryParams.User( email, password );
 
+
       AuthFactory.login(user)
-      it.findNavController().navigate(R.id.action_loginFragment_to_petFragment)
+        .addOnSuccessListener {
+          viewElement.findNavController().navigate(R.id.action_loginFragment_to_petFragment)
+        }
+        .addOnFailureListener {
+
+          val text = "Invalid email or Password"
+          val duration = Toast.LENGTH_LONG
+          val toast = Toast.makeText( activity, text, duration )
+          toast.show()
+
+        }
 
     }
 
