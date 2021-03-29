@@ -3,22 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-  app:startDestination="@id/loginFragment">
+    app:startDestination="@id/loginFragment">
+
     <fragment
       android:id="@+id/loginFragment"
       android:name="com.soyaaroncervantes.calmvet.fragments.access.LoginFragment"
-      android:label="LoginFragment" >
+      android:label="[FRAGMENT] Login" >
         <action
           android:id="@+id/action_loginFragment_to_registerFragment"
-          app:destination="@id/registerFragment" />
+          app:destination="@id/registerFragment"
+          app:popEnterAnim="@android:anim/slide_in_left"
+          app:popExitAnim="@android:anim/slide_out_right" />
         <action
           android:id="@+id/action_loginFragment_to_petFragment"
-          app:destination="@id/petFragment" />
+          app:destination="@id/petFragment"
+          app:popEnterAnim="@android:anim/fade_in"
+          app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
       android:id="@+id/personalDataFragment"
       android:name="com.soyaaroncervantes.calmvet.fragments.access.PersonalDataFragment"
-      android:label="PersonalDataFragment" >
+      android:label="[FRAGMENT] Personal Data" >
         <action
           android:id="@+id/action_personalDataFragment_to_petFragment"
           app:destination="@id/petFragment" />
@@ -26,7 +31,7 @@
     <fragment
       android:id="@+id/registerFragment"
       android:name="com.soyaaroncervantes.calmvet.fragments.access.RegisterFragment"
-      android:label="RegisterFragment" >
+      android:label="[FRAGMENT] Register" >
         <action
           android:id="@+id/action_registerFragment_to_loginFragment"
           app:destination="@id/loginFragment" />
@@ -37,7 +42,7 @@
     <fragment
       android:id="@+id/petFragment"
       android:name="com.soyaaroncervantes.calmvet.fragments.app.PetFragment"
-      android:label="fragment_pet_list"
+      android:label="[FRAGMENT] Pet List"
       tools:layout="@layout/fragment_pet_list" >
         <action
           android:id="@+id/action_petFragment_to_detailPetFragment"
@@ -45,7 +50,7 @@
     </fragment>
     <fragment
       android:id="@+id/detailPetFragment"
-      android:name="com.soyaaroncervantes.calmvet.DetailPetFragment"
-      android:label="fragment_detail_pet"
+      android:name="com.soyaaroncervantes.calmvet.fragments.app.DetailPetFragment"
+      android:label="[FRAGMENT] Pet Details"
       tools:layout="@layout/fragment_detail_pet" />
 </navigation>
