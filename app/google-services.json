@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "959385786473",
-    "project_id": "diplomado-22f3d",
-    "storage_bucket": "diplomado-22f3d.appspot.com"
+    "project_number": "289797419410",
+    "project_id": "calmvet-project",
+    "storage_bucket": "calmvet-project.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:959385786473:android:8f56175ca21537bf782af8",
+        "mobilesdk_app_id": "1:289797419410:android:e9f74b423423dfa84b514b",
         "android_client_info": {
           "package_name": "com.soyaaroncervantes.calmvet"
         }
       },
       "oauth_client": [
         {
-          "client_id": "959385786473-6rthp71mn1ovdb84ndk334lr7vqvv5ov.apps.googleusercontent.com",
+          "client_id": "289797419410-p8jr58b1i1a2pe0i7nvljmd8k5a4saco.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.soyaaroncervantes.calmvet",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "959385786473-14051qa75j7q00jjlel6vlptrpnblqeu.apps.googleusercontent.com",
+          "client_id": "289797419410-3n83qin3enofntr0coetkt9mt1r2luj1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCSHhimlHyiz7qVpzGwmD3GvL_BErT018o"
+          "current_key": "AIzaSyD7-Nkbjyn86SZ-_qOT-eMM8gFVjsxkAHU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "959385786473-14051qa75j7q00jjlel6vlptrpnblqeu.apps.googleusercontent.com",
+              "client_id": "289797419410-3n83qin3enofntr0coetkt9mt1r2luj1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
