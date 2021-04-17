@@ -1,3 +1,5 @@
 package com.soyaaroncervantes.calmvet.models.user
 
-data class UserAccess( val email: String, val password: String ): User( email )
+import com.soyaaroncervantes.calmvet.interfaces.FirebaseAuthMethods
+
+data class UserAuth(val email: String, val password: String ): User( email )
