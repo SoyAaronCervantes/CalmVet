@@ -6,14 +6,14 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings
 // Firebase Host Port
 const val HOST_PORT = "10.0.2.2"
 // Firebase Firestore Port
-const val FIRESTORE_PORT = 8080;
+const val FIRESTORE_PORT = 8080
 // Firebase Auth Port
 const val AUTH_PORT = 9099;
 
 class FirebaseInstance {
 
   companion object {
-    fun init() {
+    init {
       // Create Firebase Firestore instance
       val firestore = FirebaseFirestore.getInstance();
 
@@ -29,7 +29,6 @@ class FirebaseInstance {
       // Set firestore settings
       firestore.firestoreSettings = settings
     }
-
   }
 
 }
