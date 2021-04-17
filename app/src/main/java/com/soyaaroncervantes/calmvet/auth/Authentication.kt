@@ -1,54 +1,28 @@
-package com.soyaaroncervantes.calmvet.factory
+package com.soyaaroncervantes.calmvet.auth
 
 /** Task */
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.*
 
 /** Firebase lib */
 import com.google.firebase.ktx.Firebase
 
 /** Auth libs */
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FacebookAuthProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.soyaaroncervantes.calmvet.models.user.UserAuth
 
-class AuthFactory( private val firebaseAuth: FirebaseAuth ) {
+class Authentication( private val firebaseAuth: FirebaseAuth ) {
 
-  sealed class FactoryParams {
-    data class User( val email: String, val password: String    ) : FactoryParams()
-    data class Google( val idToken: String ) : FactoryParams()
-    data class Facebook( val idToken: String ) : FactoryParams()
+  sealed class UserFactoryParams {
+    data class EmailAndPassword( val userAuth: UserAuth ) : UserFactoryParams()
   }
 
-  fun login(params: FactoryParams): Task<AuthResult> =
-    when ( params ) {
-
-      is FactoryParams.User -> firebaseAuth.signInWithEmailAndPassword( params.email, params.password )
-      is FactoryParams.Facebook -> {
-        val credential = FacebookAuthProvider.getCredential( params.idToken )
-        firebaseAuth.signInWithCredential( credential )
-      }
-      is FactoryParams.Google -> {
-        val credential = GoogleAuthProvider.getCredential( params.idToken, null )
-        firebaseAuth.signInWithCredential( credential )
-      }
-
+  fun login( params: UserFactoryParams ): Task<AuthResult> = when ( params ) {
+      is UserFactoryParams.EmailAndPassword -> firebaseAuth.signInWithEmailAndPassword( params.userAuth.email, params.userAuth.password )
     }
 
-  fun register(params: FactoryParams): Task<AuthResult> =
-
-    when (params) {
-
-      is FactoryParams.User -> Firebase.auth.createUserWithEmailAndPassword( params.email, params.password )
-      is FactoryParams.Facebook -> {
-        val credential = FacebookAuthProvider.getCredential( params.idToken )
-        firebaseAuth.signInWithCredential( credential )
-      }
-      is FactoryParams.Google -> {
-        val credential = GoogleAuthProvider.getCredential( params.idToken, null )
-        firebaseAuth.signInWithCredential( credential )
-      }
-
+  fun register(params: UserFactoryParams): Task<AuthResult> = when (params) {
+      is UserFactoryParams.EmailAndPassword -> Firebase.auth.createUserWithEmailAndPassword( params.userAuth.email, params.userAuth.password )
     }
+
 }
