@@ -28,8 +28,9 @@
   <string name="skip_step">Saltar este paso</string>
 
   <!-- Facebook Keys -->
-  <string name="facebook_app_id" translatable="false">512478213083459</string>
-  <string name="fb_login_protocol_scheme" translatable="false">fb512478213083459</string>
+  <string name="facebook_app_id">512478213083459</string>
+  <string name="fb_login_protocol_scheme">fb512478213083459</string>
+  <string name="facebook_application_id">512478213083459</string>
 
   <!-- Twitter Keys -->
   <string name="twitter_consumer_key" translatable="false">hkXeFtOM7efvhmqgsHp12VivX</string>
