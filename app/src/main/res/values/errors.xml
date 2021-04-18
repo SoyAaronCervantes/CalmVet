@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="noNetwork">No tienes internet</string>
+  <string name="unknownError">Ups, ha ocurrido un error. Intentalo más tarde</string>
 </resources>
