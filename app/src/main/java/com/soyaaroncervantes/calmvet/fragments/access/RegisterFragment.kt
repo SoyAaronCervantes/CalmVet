@@ -37,9 +37,7 @@ class RegisterFragment : Fragment() {
     val passwordInput: TextInputEditText = view.findViewById(R.id.passwordInputEdit)
 
 
-    loginButton.setOnClickListener {
-      it.findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-    }
+    loginButton.setOnClickListener {}
 
     submitButton.setOnClickListener {
       val email = emailInput.text.toString()

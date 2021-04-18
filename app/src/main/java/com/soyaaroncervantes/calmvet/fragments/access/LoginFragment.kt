@@ -70,7 +70,7 @@ class LoginFragment : Fragment() {
 
 
     registerButton.setOnClickListener {
-      it.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+
     }
 
     submitButton.setOnClickListener {
