@@ -1,5 +1,6 @@
 package com.soyaaroncervantes.calmvet.firebase
 
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 
@@ -15,19 +16,12 @@ class FirebaseInstance {
   companion object {
     init {
       // Create Firebase Firestore instance
-      val firestore = FirebaseFirestore.getInstance();
+      val authUI = AuthUI.getInstance()
 
       // Set Firebase Emulators
-      firestore.useEmulator( HOST_PORT, FIRESTORE_PORT );
-      firestore.useEmulator( HOST_PORT, AUTH_PORT );
+      authUI.useEmulator( HOST_PORT, FIRESTORE_PORT );
+      authUI.useEmulator( HOST_PORT, AUTH_PORT );
 
-      // Disable persistence data.
-      val settings = FirebaseFirestoreSettings.Builder()
-        .setPersistenceEnabled(false)
-        .build();
-
-      // Set firestore settings
-      firestore.firestoreSettings = settings
     }
   }
 
