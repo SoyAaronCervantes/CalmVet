@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <style name="actionBar" parent="Theme.CalmVet">
-    <item name="android:windowFullscreen">@bool/windowFullScreen</item>
-    <item name="android:windowNoTitle">@bool/windowNoTitle</item>
-  </style>
-</resources>

@@ -45,6 +45,7 @@ class FirebaseUISignIn {
       .createSignInIntentBuilder()
       .setAvailableProviders(providers)
       .setIsSmartLockEnabled(true)
+      .setTheme( R.style.Theme_CalmVet )
       .build()
 
     this.activityResultLauncher.launch(firebaseIntent)
