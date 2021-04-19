@@ -3,7 +3,6 @@ package com.soyaaroncervantes.calmvet.firebase
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -21,7 +20,7 @@ const val FIRESTORE_PORT = 8080
 // Firebase Auth Port
 const val AUTH_PORT = 9099;
 
-class FirebaseInstance {
+class FirebaseUISignIn {
   lateinit var firebaseAuth: FirebaseAuth
   private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
@@ -68,7 +67,7 @@ class FirebaseInstance {
 
       val user = firebaseAuth.currentUser
 
-      if ( user !== null ) { FirebaseInstance.user = firebaseAuth.currentUser!! }
+      if ( user !== null ) { FirebaseUISignIn.user = firebaseAuth.currentUser!! }
 
     }
 
