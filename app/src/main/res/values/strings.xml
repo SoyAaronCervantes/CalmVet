@@ -1,31 +1,8 @@
 <resources>
   <string name="app_name">CalmVet</string>
 
-  <!-- Buttons -->
-  <string name="submit_button">Continuar</string>
-  <string name="register_button">Registrarse</string>
-  <string name="login_button">Iniciar Sesion</string>
-
-  <!-- Social Media Button -->
-  <string name="google_button">Google</string>
-  <string name="facebook_button">Facebook</string>
-  <string name="twitter_button">Twitter</string>
-
-
-  <!-- Headers -->
-  <string name="login_header">Iniciar Sesion</string>
-  <string name="register_header">Registrarse</string>
-
-  <!-- Inputs Hint -->
-  <string name="email_hint">Email / Correo Electrónico</string>
-  <string name="password_hint">Contraseña</string>
-  <string name="name_hint">Nombre Completo</string>
-  <string name="phone_hint">Número de Celular</string>
-
   <!-- Preference Key -->
   <string name="preference_file">com.soyaaroncervantes.calmvet.PREFERENCE_FILE_KEY</string>
-  <string name="personal_data_tittle">¡Ya casi acabamos!</string>
-  <string name="skip_step">Saltar este paso</string>
 
   <!-- Facebook Keys -->
   <string name="facebook_app_id">512478213083459</string>
@@ -40,6 +17,10 @@
   <string name="fui_progress_dialog_signing_up">Estamos creando tu cuenta</string>
   <string name="fui_progress_dialog_loading" translation_description="Loading text in dialog">Cargando…</string>
   <string name="fui_sign_in_default" translation_description="Button text to sign in">Iniciar Sesión/Registrarse</string>
+
+  <!-- Menu -->
+  <string name="signout">Cerrar Sesión</string>
+  <string name="content_description_signout">Cerrarás tu sesión y regresaras a la página de Iniciar Sesión</string>
 
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
