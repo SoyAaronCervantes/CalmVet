@@ -36,6 +36,11 @@
   <string name="twitter_consumer_key" translatable="false">hkXeFtOM7efvhmqgsHp12VivX</string>
   <string name="twitter_consumer_secret" translatable="false">7KWwh9D0qK4AkkY4OTf30kQTwQ4JtoPejGStHae9Z49dUHQhKr</string>
 
+  <!-- Firebase UI Messages -->
+  <string name="fui_progress_dialog_signing_up">Estamos creando tu cuenta</string>
+  <string name="fui_progress_dialog_loading" translation_description="Loading text in dialog">Cargando…</string>
+  <string name="fui_sign_in_default" translation_description="Button text to sign in">Iniciar Sesión/Registrarse</string>
+
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
 
