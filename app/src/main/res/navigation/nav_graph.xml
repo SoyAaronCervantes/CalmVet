@@ -3,29 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-  app:startDestination="@id/signInFragment">
-
+  app:startDestination="@id/petListFragment">
     <fragment
-      android:id="@+id/petFragment"
-      android:name="com.soyaaroncervantes.calmvet.fragments.app.PetFragment"
-      android:label="[FRAGMENT] Pet List"
-      tools:layout="@layout/fragment_pet_list" >
-        <action
-          android:id="@+id/action_petFragment_to_detailPetFragment"
-          app:destination="@id/detailPetFragment" />
-    </fragment>
-    <fragment
-      android:id="@+id/detailPetFragment"
-      android:name="com.soyaaroncervantes.calmvet.fragments.app.DetailPetFragment"
-      android:label="[FRAGMENT] Pet Details"
-      tools:layout="@layout/fragment_detail_pet" />
-    <fragment
-      android:id="@+id/signInFragment"
-      android:name="com.soyaaroncervantes.calmvet.fragments.access.SignInFragment"
-      android:label="fragment_sign_in"
-      tools:layout="@layout/fragment_sign_in" >
-        <action
-          android:id="@+id/action_signInFragment_to_petFragment"
-          app:destination="@id/petFragment" />
-    </fragment>
+      android:id="@+id/petListFragment"
+      android:name="com.soyaaroncervantes.calmvet.fragments.app.PetListFragment"
+      android:label="fragment_pet_list"
+      tools:layout="@layout/fragment_pet_list" />
 </navigation>

@@ -7,11 +7,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.soyaaroncervantes.calmvet.R
 
-import com.soyaaroncervantes.calmvet.models.pets.Animal
+import com.soyaaroncervantes.calmvet.fragments.app.dummy.DummyContent.DummyItem
 
-class MyPetRecyclerViewAdapter(
-  private val values: List<Animal>
-) : RecyclerView.Adapter<MyPetRecyclerViewAdapter.ViewHolder>() {
+/**
+ * [RecyclerView.Adapter] that can display a [DummyItem].
+ * TODO: Replace the implementation with code for your data type.
+ */
+class MyPetListRecyclerViewAdapter(
+  private val values: List<DummyItem>
+) : RecyclerView.Adapter<MyPetListRecyclerViewAdapter.ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val view = LayoutInflater.from(parent.context)
@@ -22,7 +26,7 @@ class MyPetRecyclerViewAdapter(
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val item = values[position]
     holder.idView.text = item.id
-    holder.contentView.text = item.name
+    holder.contentView.text = item.content
   }
 
   override fun getItemCount(): Int = values.size

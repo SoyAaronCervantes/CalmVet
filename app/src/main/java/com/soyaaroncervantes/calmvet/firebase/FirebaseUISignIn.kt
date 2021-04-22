@@ -32,8 +32,8 @@ class FirebaseUISignIn {
       // Create Firebase Firestore instance
       val authUI = AuthUI.getInstance()
       // Set Firebase Emulators
-//      authUI.useEmulator( HOST_PORT, FIRESTORE_PORT );
-//      authUI.useEmulator( HOST_PORT, AUTH_PORT );
+      authUI.useEmulator( HOST_PORT, FIRESTORE_PORT );
+      authUI.useEmulator( HOST_PORT, AUTH_PORT );
     }
   }
 

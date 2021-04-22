@@ -1,33 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools">
-
-  <ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:orientation="vertical">
-
-      <TextView
-        style="@style/TextAppearance.AppCompat.Display3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Titulo"/>
-
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
-        android:name="com.soyaaroncervantes.calmvet.PetFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".fragments.app.PetFragment"
-        tools:listitem="@layout/fragment_pet"
-        app:layoutManager="LinearLayoutManager"/>
-
-    </LinearLayout>
-  </ScrollView>
-</layout>
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/list"
+  android:name="com.soyaaroncervantes.calmvet.fragments.app.PetListFragment"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_marginLeft="16dp"
+  android:layout_marginRight="16dp"
+  app:layoutManager="LinearLayoutManager"
+  tools:context=".fragments.app.PetListFragment"
+  tools:listitem="@layout/fragment_pet" />
