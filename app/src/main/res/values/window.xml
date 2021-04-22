@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <bool name="windowFullScreen">false</bool>
-  <bool name="windowNoTitle">true</bool>
+  <!-- Window Background. -->
+  <item name="windowBackground" type="drawable">@drawable/background_horizontal</item>
+  <item name="windowFullscreen" type="bool">false</item>
+  <item name="windowNoTitle" type="bool">true</item>
 </resources>
