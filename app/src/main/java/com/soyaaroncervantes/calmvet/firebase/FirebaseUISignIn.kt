@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
+import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.soyaaroncervantes.calmvet.R
@@ -31,8 +32,8 @@ class FirebaseUISignIn {
       // Create Firebase Firestore instance
       val authUI = AuthUI.getInstance()
       // Set Firebase Emulators
-      authUI.useEmulator( HOST_PORT, FIRESTORE_PORT );
-      authUI.useEmulator( HOST_PORT, AUTH_PORT );
+//      authUI.useEmulator( HOST_PORT, FIRESTORE_PORT );
+//      authUI.useEmulator( HOST_PORT, AUTH_PORT );
     }
   }
 
@@ -45,7 +46,8 @@ class FirebaseUISignIn {
       .createSignInIntentBuilder()
       .setAvailableProviders(providers)
       .setIsSmartLockEnabled(true)
-      .setTheme( R.style.Theme_CalmVet )
+      .setLogo( R.drawable.logo )
+      .setResetPasswordSettings( ActionCodeSettings.zza() )
       .build()
 
     this.activityResultLauncher.launch(firebaseIntent)
