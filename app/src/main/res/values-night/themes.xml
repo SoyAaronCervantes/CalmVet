@@ -1,6 +1,6 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
   <!-- Base application theme. -->
-  <style name="Theme.CalmVet" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+  <style name="Theme.CalmVet" parent="Theme.MaterialComponents.DayNight.NoActionBar">
     <item name="android:theme">@style/appTheme</item>
   </style>
 </resources>
