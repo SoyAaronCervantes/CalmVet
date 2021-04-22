@@ -11,8 +11,9 @@
     <item name="colorOnSecondary">@color/black</item>
     <!-- Status bar color. -->
     <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-    <!-- Window Full Screen -->
-    <item name="android:windowFullscreen">@bool/windowFullScreen</item>
+
+    <item name="android:windowBackground">@drawable/windowBackground</item>
+    <item name="android:windowFullscreen">@bool/windowFullscreen</item>
     <item name="android:windowNoTitle">@bool/windowNoTitle</item>
   </style>
 </resources>
