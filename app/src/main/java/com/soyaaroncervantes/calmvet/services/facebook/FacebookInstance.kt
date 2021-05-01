@@ -1,4 +1,4 @@
-package com.soyaaroncervantes.calmvet.facebook
+package com.soyaaroncervantes.calmvet.services.facebook
 
 import com.facebook.FacebookSdk
 

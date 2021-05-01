@@ -4,9 +4,9 @@
 
   <item
     android:id="@+id/signout"
+    android:contentDescription="@string/content_description_signout"
     android:icon="@drawable/ic_exit_to_app_24"
     android:title="@string/signout"
-    android:contentDescription="@string/content_description_signout"
     app:showAsAction="ifRoom" />
 
 

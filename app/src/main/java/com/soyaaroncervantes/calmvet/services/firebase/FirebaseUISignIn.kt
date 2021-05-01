@@ -1,4 +1,4 @@
-package com.soyaaroncervantes.calmvet.firebase
+package com.soyaaroncervantes.calmvet.services.firebase
 
 import android.app.Activity
 import android.content.Context
@@ -52,6 +52,7 @@ class FirebaseUISignIn {
 
     this.activityResultLauncher.launch(firebaseIntent)
   }
+
   fun validateResult( result: ActivityResult, context: Context ) {
     val response = IdpResponse.fromResultIntent(result.data)
 
@@ -75,7 +76,9 @@ class FirebaseUISignIn {
     }
 
   }
+
   private fun providers(): ArrayList<AuthUI.IdpConfig> {
+
     return arrayListOf(
       AuthUI.IdpConfig.EmailBuilder().build(),
       AuthUI.IdpConfig.PhoneBuilder().build(),
@@ -83,6 +86,7 @@ class FirebaseUISignIn {
       AuthUI.IdpConfig.FacebookBuilder().build(),
       AuthUI.IdpConfig.TwitterBuilder().build()
     )
+
   }
 
 }
