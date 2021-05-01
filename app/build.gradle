@@ -71,7 +71,8 @@ dependencies {
 
     /** #Firebase  */
     implementation 'com.google.firebase:firebase-auth-ktx'       // Auth
-    implementation 'com.google.firebase:firebase-firestore-ktx'  // Cloud FirestoreAPI
+    implementation 'com.google.firebase:firebase-firestore-ktx'  // Cloud Firestore
+    implementation 'com.google.firebase:firebase-storage'        // Storage
 
     /** #Firebase UI */
     implementation 'com.firebaseui:firebase-ui-auth:7.1.1'       // Auth
