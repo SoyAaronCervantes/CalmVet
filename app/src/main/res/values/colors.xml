@@ -1,10 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!-- Primary Color Palette -->
+  <color name="primary_050">#E3F2FB</color>
+  <color name="primary_100">#BADEF6</color>
   <color name="primary_200">#8FC9F1</color>
+  <color name="primary_300">#64B4EA</color>
+  <color name="primary_400">#43A4E7</color>
   <color name="primary_500">#1F95E4</color>
+  <color name="primary_600">#1688D7</color>
   <color name="primary_700">#0A76C5</color>
+  <color name="primary_800">#0065B3</color>
+  <color name="primary_900">#004894</color>
+  <!-- Secondary Color Palette -->
+  <color name="secondary_050">#FFF3E0</color>
+  <color name="secondary_100">#FFE0B2</color>
   <color name="secondary_200">#FFCC80</color>
+  <color name="secondary_300">#FFB74D</color>
+  <color name="secondary_400">#FFA726</color>
+  <color name="secondary_500">#FF9800</color>
+  <color name="secondary_600">#FB8C00</color>
   <color name="secondary_700">#F57C00</color>
+  <color name="secondary_800">#EF6C00</color>
+  <color name="secondary_900">#E65100</color>
+  <!-- Gray Color Palette -->
+  <color name="gray_050">#FAFAFA</color>
+  <color name="gray_100">#F5F5F5</color>
+  <color name="gray_200">#EEEEEE</color>
+  <color name="gray_300">#E0E0E0</color>
+  <color name="gray_400">#BDBDBD</color>
+  <color name="gray_500">#9E9E9E</color>
+  <color name="gray_600">#757575</color>
+  <color name="gray_700">#616161</color>
+  <color name="gray_800">#424242</color>
+  <color name="gray_900">#212121</color>
+  <!-- Support Colors Palette -->
+  <!-- Error colors -->
+  <color name="error__700">#B7282F</color>
+  <color name="error__300">#FFB396</color>
+  <!-- Warning colors -->
+  <color name="warning__700">#B78321</color>
+  <color name="warning__200">#FFF0B3</color>
+  <!-- Success colors -->
+  <color name="success__700">#25AA69</color>
+  <color name="success__200">#B7FDB9</color>
+
   <color name="black">#FF000000</color>
   <color name="white">#FFFFFFFF</color>
 </resources>

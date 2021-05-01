@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.soyaaroncervantes.calmvet.databinding.FragmentPetsBinding
 import com.soyaaroncervantes.calmvet.services.firebase.FirebaseUISignIn
@@ -32,14 +33,14 @@ class PetsFragment : Fragment(), PetsListener {
 
   override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
     binding = FragmentPetsBinding.inflate( inflater, container, false )
-    val recyclerView = binding.root
+    val view = binding.root
 
     firebaseAuth = FirebaseAuth.getInstance()
     firebaseUISignIn = FirebaseUISignIn()
     firebaseUISignIn.firebaseAuth = firebaseAuth
     firebaseUISignIn.launchFirebaseUISignIn( getContent )
 
-    return recyclerView
+    return view
 
   }
 
@@ -51,8 +52,27 @@ class PetsFragment : Fragment(), PetsListener {
 
     petsAdapter = PetsAdapter(this)
 
+    val recyclerView = binding.recyclerViewPets
+
+    recyclerView.apply {
+      layoutManager = LinearLayoutManager( view.context )
+      adapter = petsAdapter
+    }
+
+    observerViewModel()
+
   }
 
-  override fun onPetClick(pet: Animal, position: Int) { }
+  override fun onPetClick(pet: Animal, position: Int) {
 
+  }
+
+  private fun observerViewModel() {
+    petsViewModel.listSchedule.observe( viewLifecycleOwner, { petsAdapter.updateData( it ) })
+
+    petsViewModel.isLoading.observe( viewLifecycleOwner, {
+      val relativeLayout = binding.relativeLayoutPets
+      if ( it != null ) { relativeLayout.visibility = View.INVISIBLE }
+    })
+  }
 }

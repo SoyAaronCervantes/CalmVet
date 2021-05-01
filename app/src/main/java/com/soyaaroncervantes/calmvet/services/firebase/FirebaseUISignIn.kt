@@ -16,7 +16,7 @@ import com.soyaaroncervantes.calmvet.R
 
 // Firebase Host Port
 const val HOST_PORT = "10.0.2.2"
-// Firebase Firestore Port
+// Firebase FirestoreAPI Port
 const val FIRESTORE_PORT = 8080
 // Firebase Auth Port
 const val AUTH_PORT = 9099;
@@ -29,7 +29,7 @@ class FirebaseUISignIn {
     lateinit var user: FirebaseUser
 
     init {
-      // Create Firebase Firestore instance
+      // Create Firebase FirestoreAPI instance
       val authUI = AuthUI.getInstance()
       // Set Firebase Emulators
       authUI.useEmulator( HOST_PORT, FIRESTORE_PORT );

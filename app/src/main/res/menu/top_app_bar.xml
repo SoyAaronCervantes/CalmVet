@@ -9,5 +9,4 @@
     android:title="@string/signout"
     app:showAsAction="ifRoom" />
 
-
 </menu>
