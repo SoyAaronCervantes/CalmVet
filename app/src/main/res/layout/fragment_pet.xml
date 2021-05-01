@@ -1,20 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  android:orientation="horizontal">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <TextView
-    android:id="@+id/item_number"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/text_margin"
-    android:textAppearance="?attr/textAppearanceListItem" />
+  <com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-  <TextView
-    android:id="@+id/content"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/text_margin"
-    android:textAppearance="?attr/textAppearanceListItem" />
-</LinearLayout>
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:layout_marginEnd="16dp"
+          android:contentDescription="Icon Image" />
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+
+          <TextView
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de la mascota"/>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
+            android:text="Raza de la mascota"/>
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+      <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="194dp"
+        android:layout_marginVertical="16dp"/>
+
+      <TextView
+        android:textAppearance="?attr/textAppearanceBody1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="4"
+        android:ellipsize="end"
+        android:text="Praesent neque mi, tempus sit amet tortor vitae, tincidunt ultricies diam. Maecenas eu auctor lectus. Quisque tincidunt semper cursus. Proin tempus hendrerit lacus at aliquam. Sed vel dui elementum risus pharetra porttitor eget vitae leo. Aliquam ipsum nisi, tincidunt vel aliquet ut, dapibus quis erat. In vulputate dictum ex vel suscipit. Curabitur sed aliquet ex. Fusce eu lacinia neque. Integer lobortis laoreet odio. Sed convallis quam ut ipsum rutrum lacinia. "/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Detalles"/>
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+          <materialbutton
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+  </com.google.android.material.card.MaterialCardView>
+
+</layout>

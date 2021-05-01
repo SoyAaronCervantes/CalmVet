@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="iconPadding">0dp</dimen>
+  <dimen name="insetTop">0dp</dimen>
+  <dimen name="insetBottom">0dp</dimen>
+  <dimen name="paddingLeft">12dp</dimen>
+  <dimen name="paddingRight">12dp</dimen>
+  <dimen name="minWidth">48dp</dimen>
+  <dimen name="minHeight">48dp</dimen>
+</resources>

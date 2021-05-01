@@ -14,8 +14,9 @@ class PetsAdapter( private val petsListener: PetsListener ): RecyclerView.Adapte
 
   override fun getItemCount(): Int = pets.size
 
-  override fun onBindViewHolder(holder: PetsViewHolder, position: Int) {
-    TODO("Not yet implemented")
+  override fun onBindViewHolder( petsViewHolder: PetsViewHolder, position: Int ) {
+    val pet = pets[ position ]
+
   }
 
 
