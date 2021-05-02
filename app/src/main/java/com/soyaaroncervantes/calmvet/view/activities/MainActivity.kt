@@ -1,4 +1,4 @@
-package com.soyaaroncervantes.calmvet.view.ui.activities
+package com.soyaaroncervantes.calmvet.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = DataBindingUtil.setContentView( this, R.layout.activity_main )
     // Init Firebase Emulator
-    SDKSingletons.firebase
+    // SDKSingletons.firebase
     SDKSingletons.facebook
   }
 }

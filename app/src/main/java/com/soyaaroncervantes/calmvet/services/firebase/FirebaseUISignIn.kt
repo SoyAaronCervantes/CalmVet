@@ -22,8 +22,6 @@ const val FIRESTORE_PORT = 8080
 const val AUTH_PORT = 9099;
 
 class FirebaseUISignIn {
-  lateinit var firebaseAuth: FirebaseAuth
-  private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
 
   companion object {
     lateinit var user: FirebaseUser
@@ -37,9 +35,7 @@ class FirebaseUISignIn {
     }
   }
 
-  fun launchFirebaseUISignIn( activityResultLauncher: ActivityResultLauncher<Intent> ) {
-
-    this.activityResultLauncher = activityResultLauncher
+  fun launchFirebaseUISignIn( activityResultLauncher: ActivityResultLauncher<Intent>) {
 
     val providers = providers()
     val firebaseIntent = AuthUI.getInstance()
@@ -50,31 +46,7 @@ class FirebaseUISignIn {
       .setResetPasswordSettings( ActionCodeSettings.zza() )
       .build()
 
-    this.activityResultLauncher.launch(firebaseIntent)
-  }
-
-  fun validateResult( result: ActivityResult, context: Context ) {
-    val response = IdpResponse.fromResultIntent(result.data)
-
-    // Check if response isn't null
-    if (response === null) { return }
-
-    // Check if user has Network Connection
-    if ( response.error?.errorCode == ErrorCodes.NO_NETWORK ) { Toast.makeText( context, context.getString(R.string.noNetwork), Toast.LENGTH_LONG).show() }
-
-    // Check if user has Network Connection
-    if ( response.error?.errorCode == ErrorCodes.UNKNOWN_ERROR ) { Toast.makeText( context, context.getString(R.string.unknownError), Toast.LENGTH_LONG).show() }
-
-    // If result code is ok, we get currentUser
-
-    if (result.resultCode == Activity.RESULT_OK) {
-
-      val user = firebaseAuth.currentUser
-
-      if ( user !== null ) { FirebaseUISignIn.user = firebaseAuth.currentUser!! }
-
-    }
-
+    activityResultLauncher.launch(firebaseIntent)
   }
 
   private fun providers(): ArrayList<AuthUI.IdpConfig> {

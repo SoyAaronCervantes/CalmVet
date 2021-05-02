@@ -6,7 +6,7 @@
   app:startDestination="@id/petsFragment">
     <fragment
       android:id="@+id/petsFragment"
-      android:name="com.soyaaroncervantes.calmvet.view.ui.fragments.PetsFragment"
+      android:name="com.soyaaroncervantes.calmvet.view.fragments.PetsFragment"
       android:label="fragment_pets"
       tools:layout="@layout/fragment_pets" />
 </navigation>

@@ -14,7 +14,7 @@
     android:supportsRtl="true"
     android:theme="@style/Theme.CalmVet">
     <!-- Main Activity -->
-    <activity android:name=".view.ui.activities.MainActivity">
+    <activity android:name="com.soyaaroncervantes.calmvet.view.activities.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

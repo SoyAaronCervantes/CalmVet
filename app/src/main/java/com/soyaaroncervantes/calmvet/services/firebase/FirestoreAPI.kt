@@ -1,5 +1,8 @@
 package com.soyaaroncervantes.calmvet.services.firebase
 
-class FirestoreAPI {
+import com.google.firebase.storage.FirebaseStorage
 
+class FirestoreAPI {
+  private val firebaseStorage = FirebaseStorage.getInstance()
+  private val storageRef = firebaseStorage.reference
 }
