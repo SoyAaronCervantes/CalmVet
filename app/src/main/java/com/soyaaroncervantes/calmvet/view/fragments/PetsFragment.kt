@@ -1,45 +1,38 @@
 package com.soyaaroncervantes.calmvet.view.fragments
 
 import android.app.Activity
-import android.app.Application
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.SavedStateViewModelFactory
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
-import com.google.firebase.auth.ActionCodeSettings
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.material.appbar.MaterialToolbar
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentPetsBinding
-import com.soyaaroncervantes.calmvet.services.firebase.FirebaseUISignIn
-import com.soyaaroncervantes.calmvet.viewmodel.PetsViewModel
-import com.soyaaroncervantes.calmvet.viewmodel.UserProfileViewModel
+import com.soyaaroncervantes.calmvet.services.FirebaseUISignIn
+import com.soyaaroncervantes.calmvet.viewmodel.LoginViewModel
 
 class PetsFragment : Fragment() {
   // Binding
   private lateinit var binding: FragmentPetsBinding
 
-  // FirebaseUI & Firebase Auth
-  private lateinit var firebaseAuth: FirebaseAuth
+  // FirebaseUI
   private lateinit var firebaseUISignIn: FirebaseUISignIn
+  private val firebaseUI = AuthUI.getInstance()
 
   // ViewModel & Adapter
-  private val petsViewModel: PetsViewModel by viewModels()
-  private val userProfileViewModel: UserProfileViewModel by viewModels(
-    factoryProducer = { SavedStateViewModelFactory( Application(), this ) }
-  )
+  private lateinit var loginViewModel: LoginViewModel
 
   // Content from Login
   private val getContent = registerForActivityResult( ActivityResultContracts.StartActivityForResult() ) { validateResult( it ) }
@@ -47,6 +40,8 @@ class PetsFragment : Fragment() {
   override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
     binding = FragmentPetsBinding.inflate( inflater, container, false )
     val view = binding.root
+
+    loginViewModel = ViewModelProvider( this ).get( LoginViewModel::class.java )
 
     firebaseUISignIn = FirebaseUISignIn()
     firebaseUISignIn.launchFirebaseUISignIn( getContent )
@@ -76,11 +71,7 @@ class PetsFragment : Fragment() {
 
     // If result code is ok, we get currentUser
     if (result.resultCode == Activity.RESULT_OK) {
-
-      val user = firebaseAuth.currentUser
-
-      if ( user !== null ) { FirebaseUISignIn.user = firebaseAuth.currentUser!! }
-
+      loginViewModel.authenticationState
     }
 
   }
@@ -106,4 +97,26 @@ class PetsFragment : Fragment() {
 
   }
 
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    return when( item.itemId ) {
+      R.id.signoutElement -> {
+        Log.d("[Debuggind]", "Esto es una prueba")
+//        signOutFromFirebase()
+//        firebaseUI.auth.addAuthStateListener {
+//          Log.d("[Authentication]", "${ it.currentUser }")
+//        }
+        true
+      }
+      else -> super.onOptionsItemSelected(item)
+    }
+  }
+
+  private fun signOutFromFirebase() {
+    firebaseUI
+      .signOut( requireContext() )
+      .addOnCompleteListener {
+        firebaseUISignIn.launchFirebaseUISignIn( getContent )
+      }
+
+  }
 }

@@ -2,4 +2,6 @@
 <resources>
   <string name="noNetwork">No tienes internet</string>
   <string name="unknownError">Ups, ha ocurrido un error. Intentalo más tarde</string>
+  <string name="noAuthenticated">No hemos podido iniciar sesión con tu cuenta, intentalo más tarde</string>
+
 </resources>
