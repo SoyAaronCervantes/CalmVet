@@ -31,7 +31,7 @@ class PetsFragment : Fragment() {
   private lateinit var firebaseUISignIn: FirebaseUISignIn
   private val firebaseUI = AuthUI.getInstance()
 
-  // ViewModel & Adapter
+  // ViewModel
   private lateinit var loginViewModel: LoginViewModel
 
   // Content from Login
@@ -39,14 +39,13 @@ class PetsFragment : Fragment() {
 
   override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
     binding = FragmentPetsBinding.inflate( inflater, container, false )
-    val view = binding.root
 
     loginViewModel = ViewModelProvider( this ).get( LoginViewModel::class.java )
 
     firebaseUISignIn = FirebaseUISignIn()
     firebaseUISignIn.launchFirebaseUISignIn( getContent )
 
-    return view
+    return binding.root
 
   }
 
