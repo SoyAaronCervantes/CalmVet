@@ -1,12 +1,15 @@
 package com.soyaaroncervantes.calmvet.models.pets
 
-open class Animal(
+data class Animal(
   val name: String,
-  val id: String,
   val genre: String,
   val age: String,
-  val breed: String,
+  val animal: String,
   val description: String,
   val iconPhoto: String,
-  val headerPhoto: String
-)
+  val headerPhoto: String,
+  val id: String
+) {
+  constructor() : this("", "", "", "", "", "", "", "")
+  constructor( name: String, genre: String, age: String, animal: String, description: String ): this( name,genre, age, animal, description, "", "", "" )
+}
