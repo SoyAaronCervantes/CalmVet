@@ -9,19 +9,19 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
-import com.google.android.material.appbar.MaterialToolbar
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentPetsBinding
 import com.soyaaroncervantes.calmvet.services.FirebaseUISignIn
 import com.soyaaroncervantes.calmvet.viewmodel.LoginViewModel
+import com.soyaaroncervantes.calmvet.viewmodel.ToolbarViewModel
 
 class PetsFragment : Fragment() {
   // Binding
@@ -31,13 +31,14 @@ class PetsFragment : Fragment() {
   private lateinit var firebaseUISignIn: FirebaseUISignIn
   private val firebaseUI = AuthUI.getInstance()
 
-  // ViewModel
+  // ViewModels
   private lateinit var loginViewModel: LoginViewModel
+  private val toolBarViewModel: ToolbarViewModel by activityViewModels()
 
   // Content from Login
   private val getContent = registerForActivityResult( ActivityResultContracts.StartActivityForResult() ) { validateResult( it ) }
 
-  override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
+  override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View {
     binding = FragmentPetsBinding.inflate( inflater, container, false )
 
     loginViewModel = ViewModelProvider( this ).get( LoginViewModel::class.java )
@@ -48,16 +49,19 @@ class PetsFragment : Fragment() {
     return binding.root
 
   }
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
     val recyclerView = binding.recyclerViewPets
 
     recyclerView.apply {
       layoutManager = LinearLayoutManager( view.context )
     }
 
+  }
+
+  override fun onResume() {
+    super.onResume()
+    toolBarViewModel.setTitle("Mascotas")
   }
 
   private fun validateResult( result: ActivityResult ) {
@@ -118,4 +122,5 @@ class PetsFragment : Fragment() {
       }
 
   }
+
 }

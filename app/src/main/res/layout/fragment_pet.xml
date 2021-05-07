@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
+  <data>
+
+    <variable
+      name="animal"
+      type="com.soyaaroncervantes.calmvet.models.pets.Animal" />
+  </data>
+
   <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -31,17 +38,17 @@
 
           <TextView
             android:id="@+id/petName"
-            android:textAppearance="?attr/textAppearanceHeadline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre de la mascota"/>
+            android:text="@{ animal.name }"
+            android:textAppearance="?attr/textAppearanceHeadline6" />
 
           <TextView
             android:id="@+id/petBreed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceSubtitle2"
-            android:text="Raza de la mascota"/>
+            android:text="@{ animal.animal }"
+            android:textAppearance="?attr/textAppearanceSubtitle2" />
 
         </LinearLayout>
 
@@ -51,16 +58,16 @@
         android:id="@+id/petHeaderImage"
         android:layout_width="match_parent"
         android:layout_height="194dp"
-        android:layout_marginVertical="16dp"/>
+        android:layout_marginVertical="16dp" />
 
       <TextView
         android:id="@+id/petDescription"
-        android:textAppearance="?attr/textAppearanceBody1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="4"
         android:ellipsize="end"
-        android:text="Praesent neque mi, tempus sit amet tortor vitae, tincidunt ultricies diam. Maecenas eu auctor lectus. Quisque tincidunt semper cursus. Proin tempus hendrerit lacus at aliquam. Sed vel dui elementum risus pharetra porttitor eget vitae leo. Aliquam ipsum nisi, tincidunt vel aliquet ut, dapibus quis erat. In vulputate dictum ex vel suscipit. Curabitur sed aliquet ex. Fusce eu lacinia neque. Integer lobortis laoreet odio. Sed convallis quam ut ipsum rutrum lacinia. "/>
+        android:maxLines="4"
+        android:text="@{ animal.description }"
+        android:textAppearance="?attr/textAppearanceBody1" />
 
       <LinearLayout
         android:layout_width="match_parent"
@@ -70,10 +77,10 @@
 
         <com.google.android.material.button.MaterialButton
           android:id="@+id/detailPetButton"
-          android:backgroundTint="@color/primary_700"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Detalles"/>
+          android:backgroundTint="@color/primary_700"
+          android:text="Detalles" />
 
         <LinearLayout
           android:layout_width="match_parent"
@@ -82,11 +89,11 @@
           android:orientation="vertical">
 
           <Button
-            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
             android:id="@+id/addToFavorite"
+            style="@style/Widget.App.Button.OutlinedButton.IconOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:icon="@drawable/ic_round_favorite_24"/>
+            app:icon="@drawable/ic_round_favorite_24" />
 
         </LinearLayout>
 

@@ -36,7 +36,6 @@ class FirebaseUISignIn {
       .setAvailableProviders( providers() )
       .setIsSmartLockEnabled(true)
       .setLogo( R.drawable.logo )
-      .setIsSmartLockEnabled( false )
       .setResetPasswordSettings( ActionCodeSettings.zza() )
       .build()
   }
