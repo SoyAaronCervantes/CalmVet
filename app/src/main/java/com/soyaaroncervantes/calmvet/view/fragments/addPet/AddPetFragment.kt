@@ -10,7 +10,6 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentAddPetBinding
