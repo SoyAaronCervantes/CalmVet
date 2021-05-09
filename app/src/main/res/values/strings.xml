@@ -33,5 +33,7 @@
   <string name="pet_genre">¿Qué género es?</string>
   <string name="pet_male">Masculino</string>
   <string name="pet_female">Femenino</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

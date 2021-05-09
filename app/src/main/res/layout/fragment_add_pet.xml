@@ -67,23 +67,24 @@
         android:layout_height="wrap_content"
         android:text="@string/pet_genre"/>
       <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/radioGroupGenres"
         android:checkedButton="@+id/radio_button_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RadioButton
-          android:id="@+id/radio_button_1"
+          android:id="@+id/radio_button_male"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:text="@string/pet_male"/>
         <RadioButton
-          android:id="@+id/radio_button_2"
+          android:id="@+id/radio_button_female"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:text="@string/pet_female"/>
       </RadioGroup>
     </LinearLayout>
     <com.google.android.material.button.MaterialButton
+      android:id="@+id/sendToImageFragment"
       android:layout_marginTop="20dp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"

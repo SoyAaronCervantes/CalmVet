@@ -3,14 +3,15 @@ package com.soyaaroncervantes.calmvet.view.fragments
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,26 +37,24 @@ class PetsFragment : Fragment() {
   private val toolBarViewModel: ToolbarViewModel by activityViewModels()
 
   // Content from Login
-  private val getContent = registerForActivityResult( ActivityResultContracts.StartActivityForResult() ) { validateResult( it ) }
+  private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { validateResult(it) }
 
-  override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View {
-    binding = FragmentPetsBinding.inflate( inflater, container, false )
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    binding = FragmentPetsBinding.inflate(inflater, container, false)
 
-    loginViewModel = ViewModelProvider( this ).get( LoginViewModel::class.java )
+    loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
     firebaseUISignIn = FirebaseUISignIn()
-    firebaseUISignIn.launchFirebaseUISignIn( getContent )
+    firebaseUISignIn.launchFirebaseUISignIn(getContent)
 
     return binding.root
 
   }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     val recyclerView = binding.recyclerViewPets
-
-    recyclerView.apply {
-      layoutManager = LinearLayoutManager( view.context )
-    }
+    recyclerView.apply { layoutManager = LinearLayoutManager(view.context) }
 
   }
 
@@ -64,13 +63,15 @@ class PetsFragment : Fragment() {
     toolBarViewModel.setTitle("Mascotas")
   }
 
-  private fun validateResult( result: ActivityResult ) {
+  private fun validateResult(result: ActivityResult) {
 
     val response = IdpResponse.fromResultIntent(result.data)
 
-    val responseIsValidated = validateResponse( response )
+    val responseIsValidated = validateResponse(response)
 
-    if ( !responseIsValidated ) { return }
+    if (!responseIsValidated) {
+      return
+    }
 
     // If result code is ok, we get currentUser
     if (result.resultCode == Activity.RESULT_OK) {
@@ -79,20 +80,22 @@ class PetsFragment : Fragment() {
 
   }
 
-  private fun validateResponse( response: IdpResponse? ): Boolean {
+  private fun validateResponse(response: IdpResponse?): Boolean {
 
     // Check if response isn't null
-    if (response === null) { return false }
+    if (response === null) {
+      return false
+    }
 
     // Check if user has Network Connection
-    if ( response.error?.errorCode == ErrorCodes.NO_NETWORK ) {
-      Toast.makeText( context, getString(R.string.noNetwork), Toast.LENGTH_LONG).show()
+    if (response.error?.errorCode == ErrorCodes.NO_NETWORK) {
+      Toast.makeText(context, getString(R.string.noNetwork), Toast.LENGTH_LONG).show()
       return false
     }
 
     // Check if user has Diff Error
-    if ( response.error?.errorCode == ErrorCodes.UNKNOWN_ERROR ) {
-      Toast.makeText( context, getString(R.string.unknownError), Toast.LENGTH_LONG).show()
+    if (response.error?.errorCode == ErrorCodes.UNKNOWN_ERROR) {
+      Toast.makeText(context, getString(R.string.unknownError), Toast.LENGTH_LONG).show()
       return false
     }
 
@@ -101,7 +104,7 @@ class PetsFragment : Fragment() {
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    return when( item.itemId ) {
+    return when (item.itemId) {
       R.id.signoutElement -> {
         Log.d("[Debuggind]", "Esto es una prueba")
 //        signOutFromFirebase()
@@ -116,9 +119,9 @@ class PetsFragment : Fragment() {
 
   private fun signOutFromFirebase() {
     firebaseUI
-      .signOut( requireContext() )
+      .signOut(requireContext())
       .addOnCompleteListener {
-        firebaseUISignIn.launchFirebaseUISignIn( getContent )
+        firebaseUISignIn.launchFirebaseUISignIn(getContent)
       }
 
   }

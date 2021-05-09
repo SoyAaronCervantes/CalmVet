@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/main_navigation"
+  app:startDestination="@id/petsFragment">
+
+  <fragment
+    android:id="@+id/petsFragment"
+    android:name="com.soyaaroncervantes.calmvet.view.fragments.PetsFragment"
+    android:label="PetsFragment" >
+    <action
+      android:id="@+id/action_petsFragment_to_addPetFragment"
+      app:destination="@id/addPetFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/addPetFragment"
+    android:name="com.soyaaroncervantes.calmvet.view.fragments.AddPetFragment"
+    android:label="AddPetFragment" />
+</navigation>
