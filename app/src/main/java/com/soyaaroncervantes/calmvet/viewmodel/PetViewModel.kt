@@ -13,4 +13,8 @@ class PetViewModel: ViewModel() {
   fun setAnimal( animal: Animal ) {
     mutableAnimal.value = animal
   }
+
+  fun getAnimalAvailable(): ArrayList<String> {
+    return arrayListOf( "Perro", "Gato", "Cuyo", "Uron", "Conejo", "Pato" )
+  }
 }

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -13,9 +15,12 @@ import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.adapter.ViewPagerAdapter
 import com.soyaaroncervantes.calmvet.databinding.FragmentViewPagerBinding
 import com.soyaaroncervantes.calmvet.databinding.TablayoutBinding
+import com.soyaaroncervantes.calmvet.databinding.ToolbarBinding
+import com.soyaaroncervantes.calmvet.viewmodel.ToolbarViewModel
 
 class ViewPagerFragment : Fragment() {
   private lateinit var binding: FragmentViewPagerBinding
+  private val toolbarViewModel: ToolbarViewModel by activityViewModels()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
@@ -26,12 +31,23 @@ class ViewPagerFragment : Fragment() {
 
     val viewPager = binding.viewPager
     val tabBar = TablayoutBinding.bind( view )
+    val toolbar = ToolbarBinding.bind( view )
 
     viewPager.adapter = adapter
-
+    toolbarViewModel.title.observe( viewLifecycleOwner) { toolbar.topAppBar.title = it }
     tabLayoutManager(tabBar.tabLayout, viewPager)
 
     return view
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    val addPetButton = binding.addPet
+
+    addPetButton.setOnClickListener {
+      findNavController().navigate(R.id.action_viewPagerFragment_to_addPetFragment)
+    }
+
   }
 
   private fun tabLayoutManager(tabLayout: TabLayout, viewPager: ViewPager2) {
