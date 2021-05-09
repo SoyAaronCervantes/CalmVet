@@ -6,15 +6,15 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.soyaaroncervantes.calmvet.view.fragments.AddPetFragment
 import com.soyaaroncervantes.calmvet.view.fragments.PetsFragment
 
-class ViewPagerAdapter(private val fragmentActivity: FragmentActivity ): FragmentStateAdapter( fragmentActivity ) {
+class ViewPagerAdapter( fragmentActivity: FragmentActivity ): FragmentStateAdapter( fragmentActivity ) {
   override fun getItemCount(): Int = 2
 
   override fun createFragment(position: Int): Fragment {
     return when( position ) {
       0 -> PetsFragment()
       1 -> AddPetFragment()
-      else -> PetsFragment()
+      else -> throw Throwable("Invalid position $position.")
     }
-  }
+  } 
 
 }

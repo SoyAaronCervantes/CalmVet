@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.soyaaroncervantes.calmvet.R
@@ -43,7 +43,7 @@ class AddPetFragment : Fragment() {
     val inputAnimal = binding.animalAutoComplete.text.toString()
     val inputAge = binding.inputPetAge.text.toString()
     val radioGroupGenres = binding.radioGroupGenres
-    val inputGenre = getGenre( radioGroupGenres )
+    val inputGenre = getGenre( radioGroupGenres ).toString()
     val button = binding.sendToImageFragment
 
     val animal = Animal( inputName, inputGenre, inputAge, inputAnimal, inputDescription )
@@ -53,21 +53,43 @@ class AddPetFragment : Fragment() {
     animalAutoComplete.threshold = 1
 
     button.setOnClickListener {
-      goToTakeAnimalPhotos( animal )
+      if ( !validateInputs() ) {
+        val toast = Toast.makeText(requireContext(), "Llena el formulario, para continuar", Toast.LENGTH_SHORT)
+        toast.show()
+      } else {
+        goToTakeAnimalPhotos( animal )
+      }
     }
 
   }
 
-  private fun getGenre( radioGroup: RadioGroup ): String {
+  private fun getGenre( radioGroup: RadioGroup ): CharSequence {
     return when( radioGroup.checkedRadioButtonId ) {
       R.id.radio_button_male -> binding.radioButtonMale.text
-      else -> binding.radioButtonFemale.text
-    }.toString()
+      R.id.radio_button_female -> binding.radioButtonFemale.text
+      else -> ""
+    }
   }
 
   private fun goToTakeAnimalPhotos(animal: Animal) {
     petViewModel.setAnimal( animal )
-    findNavController().navigate(R.id.action_petsFragment_to_addPetFragment)
+    findNavController().navigate(R.id.action_addPetFragment_to_petPhotosFragment)
+  }
+
+  private fun validateInputs(): Boolean {
+    val inputName = binding.inputPetName.text.isNullOrEmpty()
+    val inputDescription = binding.inputPetDescription.text.isNullOrEmpty()
+    val inputAnimal = binding.animalAutoComplete.text.isNullOrEmpty()
+    val inputAge = binding.inputPetAge.text.isNullOrEmpty()
+    val radioGroupGenres = binding.radioGroupGenres
+    val inputGenre = getGenre( radioGroupGenres ).isEmpty()
+
+    if ( !inputName || !inputDescription || !inputAnimal || !inputAge || !inputGenre ) {
+      return false
+    }
+
+    return true
+
   }
 
 }
