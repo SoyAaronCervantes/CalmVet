@@ -89,11 +89,12 @@
           android:orientation="vertical">
 
           <Button
-            android:id="@+id/addToFavorite"
             style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+            android:id="@+id/addToFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:icon="@drawable/ic_round_favorite_24" />
+            app:icon="@drawable/ic_favorite_border"
+            app:iconTint="#A8A8A8" />
 
         </LinearLayout>
 

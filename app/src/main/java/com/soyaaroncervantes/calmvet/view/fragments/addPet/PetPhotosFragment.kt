@@ -9,11 +9,13 @@ import androidx.fragment.app.activityViewModels
 import com.soyaaroncervantes.calmvet.databinding.FragmentPetPhotosBinding
 import com.soyaaroncervantes.calmvet.models.pets.Animal
 import com.soyaaroncervantes.calmvet.viewmodel.PetViewModel
+import com.soyaaroncervantes.calmvet.viewmodel.ToolbarViewModel
 
 class PetPhotosFragment : Fragment() {
   private lateinit var binding: FragmentPetPhotosBinding
   private lateinit var animal: Animal
   private val petViewModel: PetViewModel by activityViewModels()
+  private val toolBarViewModel: ToolbarViewModel by activityViewModels()
 
   override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
     binding = FragmentPetPhotosBinding.inflate( inflater, container, false )
@@ -23,5 +25,10 @@ class PetPhotosFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     petViewModel.animal.observe( viewLifecycleOwner ) { animal = it }
+  }
+
+  override fun onResume() {
+    super.onResume()
+    toolBarViewModel.setTitle("Agregar Fotos");
   }
 }
