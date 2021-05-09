@@ -16,7 +16,6 @@ import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentAddPetBinding
 import com.soyaaroncervantes.calmvet.databinding.ToolbarBinding
 import com.soyaaroncervantes.calmvet.models.pets.Animal
-import com.soyaaroncervantes.calmvet.viewmodel.AddPetViewModel
 import com.soyaaroncervantes.calmvet.viewmodel.PetViewModel
 
 class AddPetFragment : Fragment() {
