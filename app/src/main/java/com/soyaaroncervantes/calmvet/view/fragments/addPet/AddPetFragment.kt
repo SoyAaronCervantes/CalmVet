@@ -20,7 +20,6 @@ import com.soyaaroncervantes.calmvet.viewmodel.PetViewModel
 
 class AddPetFragment : Fragment() {
   private lateinit var binding: FragmentAddPetBinding
-  private lateinit var addPetViewModel: AddPetViewModel
   private val petViewModel: PetViewModel by activityViewModels()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -28,7 +27,6 @@ class AddPetFragment : Fragment() {
     val view = binding.root
     val toolbar = ToolbarBinding.bind( view )
     toolbar.topAppBar.title = "Agregar Mascotas"
-    addPetViewModel = ViewModelProvider( this).get( AddPetViewModel::class.java )
     return view
   }
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
