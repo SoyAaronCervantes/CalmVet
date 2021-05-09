@@ -1,4 +1,4 @@
-package com.soyaaroncervantes.calmvet.view.fragments
+package com.soyaaroncervantes.calmvet.view.fragments.addPet
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

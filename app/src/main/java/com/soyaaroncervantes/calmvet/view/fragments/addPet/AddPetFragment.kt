@@ -1,4 +1,4 @@
-package com.soyaaroncervantes.calmvet.view.fragments
+package com.soyaaroncervantes.calmvet.view.fragments.addPet
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentAddPetBinding
 import com.soyaaroncervantes.calmvet.models.pets.Animal
@@ -73,7 +72,6 @@ class AddPetFragment : Fragment() {
 
   private fun goToTakeAnimalPhotos(animal: Animal) {
     petViewModel.setAnimal( animal )
-    findNavController().navigate(R.id.action_addPetFragment_to_petPhotosFragment)
   }
 
   private fun validateInputs(): Boolean {
