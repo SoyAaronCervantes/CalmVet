@@ -54,11 +54,6 @@ class AddPetFragment : Fragment() {
     }
   }
 
-  private fun goToTakeAnimalPhotos(animal: Animal) {
-    petViewModel.setAnimal( animal )
-    findNavController().navigate(R.id.action_addPetFragment_to_petPhotosFragment)
-  }
-
   private fun validateInputs() {
     val inputName = binding.inputPetName.text.toString()
     val inputDescription = binding.inputPetDescription.text.toString()
@@ -76,6 +71,11 @@ class AddPetFragment : Fragment() {
     val animal = Animal( inputName, inputGenre, inputAge, inputAnimal, inputDescription )
     goToTakeAnimalPhotos( animal )
 
+  }
+
+  private fun goToTakeAnimalPhotos(animal: Animal) {
+    petViewModel.setAnimal( animal )
+    findNavController().navigate(R.id.action_addPetFragment_to_petPhotosFragment)
   }
 
 }
