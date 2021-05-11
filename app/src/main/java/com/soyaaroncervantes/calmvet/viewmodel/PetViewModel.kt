@@ -15,6 +15,6 @@ class PetViewModel: ViewModel() {
   }
 
   fun getAnimalAvailable(): ArrayList<String> {
-    return arrayListOf( "Perro", "Gato", "Cuyo", "Uron", "Conejo", "Pato" )
+    return arrayListOf( "Perro", "Gato", "Cuyo", "Hurón", "Conejo", "Pato" )
   }
 }
