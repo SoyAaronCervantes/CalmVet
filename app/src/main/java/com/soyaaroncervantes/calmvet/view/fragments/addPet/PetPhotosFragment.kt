@@ -2,25 +2,32 @@ package com.soyaaroncervantes.calmvet.view.fragments.addPet
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.camera.core.*
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.bumptech.glide.Glide
+import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentPetPhotosBinding
 import com.soyaaroncervantes.calmvet.models.pets.Animal
 import com.soyaaroncervantes.calmvet.viewmodel.PetViewModel
 import com.soyaaroncervantes.calmvet.viewmodel.ToolbarViewModel
 import java.io.File
+import java.nio.ByteBuffer
+import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class PetPhotosFragment : Fragment() {
   private lateinit var binding: FragmentPetPhotosBinding
@@ -28,20 +35,27 @@ class PetPhotosFragment : Fragment() {
   private val petViewModel: PetViewModel by activityViewModels()
   private val toolBarViewModel: ToolbarViewModel by activityViewModels()
 
-  private fun hasCameraPermissions() = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-  private fun hasGalleryPermissions() = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-  private fun hasWritePermissions() = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+  private var imageCapture: ImageCapture? = null
+  private lateinit var outputDirectory: File
+  private lateinit var cameraExecutor: ExecutorService
 
-  private val requestTakePictureLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) {
+  // Check if we request permission
+  private fun hasPermissions() = REQUIRED_PERMISSIONS.all { ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED }
 
-  }
+  // Ask for permissions
+  private fun requestPermissions() = ActivityCompat.requestPermissions(requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
 
-  private val requestPickPictureLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { photo ->
-    Glide
-      .with(this)
-      .load(photo)
-      .fitCenter()
-      .into(binding.imageViewProfile)
+  // ask for permissions
+  private val requestPermissions = registerForActivityResult(RequestPermission()) {
+    if (it) {
+      startCamera()
+    } else {
+      Toast.makeText(
+        requireContext(),
+        "Permisos no aceptados por el usuario",
+        Toast.LENGTH_SHORT
+      ).show()
+    }
   }
 
   override fun onResume() {
@@ -51,59 +65,88 @@ class PetPhotosFragment : Fragment() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     binding = FragmentPetPhotosBinding.inflate(inflater, container, false)
+    petViewModel.animal.observe(viewLifecycleOwner) { animal = it }
+    useCamera()
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    petViewModel.animal.observe(viewLifecycleOwner) { animal = it }
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    cameraExecutor.shutdown()
+  }
+
+  // Camera functions
+  private fun startCamera() {
+    val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+    cameraProviderFuture.addListener({
+      val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+      val preview = Preview.Builder()
+        .build()
+        .also { it.setSurfaceProvider(binding.viewFinder.surfaceProvider) }
+
+      imageCapture = ImageCapture.Builder().build()
+
+      val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+      cameraProvider.unbindAll()
+      cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
+
+
+    }, ContextCompat.getMainExecutor(requireContext()))
+  }
+
+  private fun takePhoto() {
+    val imageCapture = imageCapture ?: return
+    val photoFile = File(
+      outputDirectory,
+      SimpleDateFormat(FILENAME_FORMAT, Locale.ROOT).format(System.currentTimeMillis()) + ".jpg"
+    )
+    val outputOptions= ImageCapture.OutputFileOptions.Builder( photoFile ).build()
+    imageCapture.takePicture( outputOptions, ContextCompat.getMainExecutor(requireContext()), object : ImageCapture.OnImageSavedCallback {
+      override fun onError(exc: ImageCaptureException) {
+        Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+      }
+
+      override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+        val savedURI = Uri.fromFile( photoFile )
+        val msg = "Photo capture succeeded: $savedURI"
+        Toast.makeText( requireContext(), msg, Toast.LENGTH_SHORT).show()
+        Log.d(TAG, msg)
+      }
+    })
+  }
+
+  private fun getOutputDirectory(): File {
+    val mediaDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.let {
+      File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
+    }
+    return if (mediaDir != null && mediaDir.exists()) mediaDir else requireContext().filesDir
+  }
+
+  private fun useCamera() {
+    if (hasPermissions()) {
+      startCamera()
+    } else {
+      requestPermissions()
+    }
     val cameraButton = binding.cameraButton
-    val galleryButton = binding.galleryButton
-
-    cameraButton.setOnClickListener {
-      hasCameraPermissions()
-      hasWritePermissions()
-      launchCamera()
-    }
-
-    galleryButton.setOnClickListener {
-      hasGalleryPermissions()
-      launchGallery()
-    }
-  }
-
-
-  private fun selectPhoto() {
-    showToast("Pick a photo here")
-  }
-
-  // Launch Camera
-  private fun launchCamera() {
-    val currentPhotoPath = createImageFile()
-    val photoUri = currentPhotoPath.absoluteFile.toUri()
-
-    requestTakePictureLauncher.launch(photoUri)
+    cameraButton.setOnClickListener { takePhoto() }
+    outputDirectory = getOutputDirectory()
+    cameraExecutor = Executors.newSingleThreadExecutor()
+    requestPermissions.launch(Manifest.permission.CAMERA)
 
   }
 
-  private fun launchGallery() {
-    requestPickPictureLauncher.launch("image/*")
+  companion object {
+    private const val TAG = "CameraXBasic"
+    private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+    private const val REQUEST_CODE_PERMISSIONS = 10
+    private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
   }
 
 
-  private fun createImageFile(): File {
-    val timeStamp = SimpleDateFormat("yyyy-MM:dd-HH:mm:ss", Locale.ROOT).format(Date())
-    val storageDir: File? = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-    return File.createTempFile(
-      "JPEG_${timeStamp}_",
-      "jpg",
-      storageDir
-    );
-  }
-
-  // #Toast
-  private fun showToast(message: String) {
-    val toast = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT)
-    toast.show()
-  }
 }
