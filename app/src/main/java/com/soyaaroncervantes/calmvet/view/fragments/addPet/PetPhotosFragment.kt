@@ -9,9 +9,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -20,10 +22,10 @@ import androidx.fragment.app.activityViewModels
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentPetPhotosBinding
 import com.soyaaroncervantes.calmvet.models.pets.Animal
+import com.soyaaroncervantes.calmvet.services.ToastManager
 import com.soyaaroncervantes.calmvet.viewmodel.PetViewModel
 import com.soyaaroncervantes.calmvet.viewmodel.ToolbarViewModel
 import java.io.File
-import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -43,35 +45,27 @@ class PetPhotosFragment : Fragment() {
   private fun hasPermissions() = REQUIRED_PERMISSIONS.all { ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED }
 
   // Ask for permissions
-  private fun requestPermissions() = ActivityCompat.requestPermissions(requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+  private fun requestPermissions() = ActivityCompat.requestPermissions(requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
 
   // ask for permissions
   private val requestPermissions = registerForActivityResult(RequestPermission()) {
     if (it) {
       startCamera()
     } else {
-      Toast.makeText(
-        requireContext(),
-        "Permisos no aceptados por el usuario",
-        Toast.LENGTH_SHORT
-      ).show()
+      ToastManager.displayToast(requireContext(), "Permisos no aceptados por el usuario")
     }
   }
 
   override fun onResume() {
     super.onResume()
-    toolBarViewModel.setTitle("Agregar Fotos");
+    toolBarViewModel.setTitle("Agregar Fotos")
   }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentPetPhotosBinding.inflate(inflater, container, false)
     petViewModel.animal.observe(viewLifecycleOwner) { animal = it }
     useCamera()
     return binding.root
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
   }
 
   override fun onDestroy() {
@@ -105,16 +99,16 @@ class PetPhotosFragment : Fragment() {
       outputDirectory,
       SimpleDateFormat(FILENAME_FORMAT, Locale.ROOT).format(System.currentTimeMillis()) + ".jpg"
     )
-    val outputOptions= ImageCapture.OutputFileOptions.Builder( photoFile ).build()
-    imageCapture.takePicture( outputOptions, ContextCompat.getMainExecutor(requireContext()), object : ImageCapture.OnImageSavedCallback {
+    val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+    imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(requireContext()), object : ImageCapture.OnImageSavedCallback {
       override fun onError(exc: ImageCaptureException) {
         Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
       }
 
       override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-        val savedURI = Uri.fromFile( photoFile )
+        val savedURI = Uri.fromFile(photoFile)
         val msg = "Photo capture succeeded: $savedURI"
-        Toast.makeText( requireContext(), msg, Toast.LENGTH_SHORT).show()
+        ToastManager.displayToast(requireContext(), msg)
         Log.d(TAG, msg)
       }
     })
