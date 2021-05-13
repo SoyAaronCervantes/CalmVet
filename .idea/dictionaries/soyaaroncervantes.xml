@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="soyaaroncervantes">
     <words>
+      <w>aceptados</w>
       <w>agregar</w>
       <w>años</w>
       <w>calmvet</w>
@@ -20,9 +21,11 @@
       <w>femenino</w>
       <w>firestore</w>
       <w>formulario</w>
+      <w>fotos</w>
       <w>gato</w>
       <w>género</w>
       <w>hace</w>
+      <w>hurón</w>
       <w>imágenes</w>
       <w>iniciar</w>
       <w>jetpack</w>
@@ -33,8 +36,10 @@
       <w>máscota</w>
       <w>nombre</w>
       <w>pato</w>
+      <w>permisos</w>
       <w>perro</w>
       <w>página</w>
+      <w>rechazados</w>
       <w>registrarse</w>
       <w>regresarás</w>
       <w>sesión</w>
@@ -44,6 +49,7 @@
       <w>tiene</w>
       <w>tienes</w>
       <w>uron</w>
+      <w>usuario</w>
     </words>
   </dictionary>
 </component>

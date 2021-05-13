@@ -10,18 +10,15 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentAddPetBinding
 import com.soyaaroncervantes.calmvet.databinding.ToolbarBinding
 import com.soyaaroncervantes.calmvet.models.pets.Animal
-import com.soyaaroncervantes.calmvet.viewmodel.AddPetViewModel
 import com.soyaaroncervantes.calmvet.viewmodel.PetViewModel
 
 class AddPetFragment : Fragment() {
   private lateinit var binding: FragmentAddPetBinding
-  private lateinit var addPetViewModel: AddPetViewModel
   private val petViewModel: PetViewModel by activityViewModels()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -29,7 +26,6 @@ class AddPetFragment : Fragment() {
     val view = binding.root
     val toolbar = ToolbarBinding.bind( view )
     toolbar.topAppBar.title = "Agregar Mascotas"
-    addPetViewModel = ViewModelProvider( this).get( AddPetViewModel::class.java )
     return view
   }
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,11 +54,6 @@ class AddPetFragment : Fragment() {
     }
   }
 
-  private fun goToTakeAnimalPhotos(animal: Animal) {
-    petViewModel.setAnimal( animal )
-    findNavController().navigate(R.id.action_addPetFragment_to_petPhotosFragment)
-  }
-
   private fun validateInputs() {
     val inputName = binding.inputPetName.text.toString()
     val inputDescription = binding.inputPetDescription.text.toString()
@@ -80,6 +71,11 @@ class AddPetFragment : Fragment() {
     val animal = Animal( inputName, inputGenre, inputAge, inputAnimal, inputDescription )
     goToTakeAnimalPhotos( animal )
 
+  }
+
+  private fun goToTakeAnimalPhotos(animal: Animal) {
+    petViewModel.setAnimal( animal )
+    findNavController().navigate(R.id.action_addPetFragment_to_petPhotosFragment)
   }
 
 }
