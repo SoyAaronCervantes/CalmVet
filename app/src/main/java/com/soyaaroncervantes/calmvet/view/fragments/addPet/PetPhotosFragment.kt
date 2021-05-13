@@ -108,6 +108,7 @@ class PetPhotosFragment : Fragment() {
       override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
         val savedURI = Uri.fromFile(photoFile)
         val msg = "Photo capture succeeded: $savedURI"
+        animal.iconPhoto = savedURI;
         ToastManager.displayToast(requireContext(), msg)
         Log.d(TAG, msg)
       }
