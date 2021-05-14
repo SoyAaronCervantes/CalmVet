@@ -110,7 +110,7 @@ class PetPhotosFragment : Fragment() {
         val msg = "Photo capture succeeded: $savedURI"
         animal.headerPhoto = savedURI
         petViewModel.setAnimal( animal );
-        petViewModel.save( animal )
+        val saved = petViewModel.saveDataOnFirestore( animal )
         ToastManager.displayToast(requireContext(), msg)
         Log.d(TAG, msg)
         Log.d(TAG, animal.toString())

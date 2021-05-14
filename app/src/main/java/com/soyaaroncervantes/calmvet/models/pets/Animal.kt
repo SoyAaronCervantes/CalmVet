@@ -22,4 +22,8 @@ data class Animal(
     Uri.EMPTY,
     FirebaseFirestore.getInstance().collection("pets").document().id
   )
+
+  object ToHashMap {
+    fun from(data: Animal) = mapOf("name" to data.name, "genre" to data.genre, "age" to data.age, "animal" to data.animal, "description" to data.description)
+  }
 }
