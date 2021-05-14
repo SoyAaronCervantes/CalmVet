@@ -26,6 +26,7 @@ object FirebasePetService {
   suspend fun getPetsFromUser( user: FirebaseUser ) {
 
   }
+
   suspend fun addPetToUser( animal: Animal, user: FirebaseUser ): Void? {
     val db = FirebaseFirestore.getInstance()
     return try {

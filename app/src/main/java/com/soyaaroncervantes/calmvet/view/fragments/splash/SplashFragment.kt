@@ -2,10 +2,8 @@ package com.soyaaroncervantes.calmvet.view.fragments.splash
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -18,7 +16,7 @@ import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentSplashBinding
-import com.soyaaroncervantes.calmvet.services.FirebaseUISignIn
+import com.soyaaroncervantes.calmvet.services.FirebaseSignInService
 import com.soyaaroncervantes.calmvet.viewmodel.LoginViewModel
 
 class SplashFragment : Fragment() {
@@ -26,7 +24,7 @@ class SplashFragment : Fragment() {
   private lateinit var binding: FragmentSplashBinding
 
   // FirebaseUI
-  private lateinit var firebaseUISignIn: FirebaseUISignIn
+  private lateinit var firebaseUISignIn: FirebaseSignInService
   private val firebaseUI = AuthUI.getInstance()
 
   // ViewModels
@@ -38,13 +36,11 @@ class SplashFragment : Fragment() {
     findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
   }
 
-  override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
+  override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View {
     binding = FragmentSplashBinding.inflate( inflater, container, false )
 
     loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-
-    firebaseUISignIn = FirebaseUISignIn()
-    firebaseUISignIn.launchFirebaseUISignIn(getContent)
+    FirebaseSignInService.launchFirebaseUISignIn(getContent)
 
     return binding.root
   }
@@ -58,7 +54,7 @@ class SplashFragment : Fragment() {
 
     // If result code is ok, we get currentUser
     if (result.resultCode == Activity.RESULT_OK) {
-      loginViewModel.authenticationState
+      loginViewModel
     }
 
   }

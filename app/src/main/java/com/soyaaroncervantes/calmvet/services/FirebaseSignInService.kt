@@ -8,17 +8,14 @@ import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseUser
 import com.soyaaroncervantes.calmvet.R
 
-class FirebaseUISignIn {
+object FirebaseSignInService {
 
   fun launchFirebaseUISignIn( activityResultLauncher: ActivityResultLauncher<Intent>) {
-
     val firebaseIntent = firebaseUIConfig()
-
     activityResultLauncher.launch(firebaseIntent)
   }
 
   private fun providers(): ArrayList<AuthUI.IdpConfig> {
-
     return arrayListOf(
       AuthUI.IdpConfig.EmailBuilder().build(),
       AuthUI.IdpConfig.PhoneBuilder().build(),
@@ -26,11 +23,9 @@ class FirebaseUISignIn {
       AuthUI.IdpConfig.FacebookBuilder().build(),
       AuthUI.IdpConfig.TwitterBuilder().build()
     )
-
   }
 
   private fun firebaseUIConfig(): Intent {
-
     return AuthUI.getInstance()
       .createSignInIntentBuilder()
       .setAvailableProviders( providers() )

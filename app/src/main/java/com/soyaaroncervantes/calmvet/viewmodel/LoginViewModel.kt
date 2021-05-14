@@ -1,18 +1,18 @@
 package com.soyaaroncervantes.calmvet.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseUser
-import com.soyaaroncervantes.calmvet.livedata.FirebaseUserLiveData
+import com.soyaaroncervantes.calmvet.services.FirebaseUserService
+import kotlinx.coroutines.launch
 
 class LoginViewModel(): ViewModel() {
-  private var firebaseUserLiveData = FirebaseUserLiveData()
-  private var firebaseUser: MutableLiveData<FirebaseUser> = MutableLiveData()
+  private val _userProfile = MutableLiveData<FirebaseUser>()
+  val userProfile: LiveData<FirebaseUser> = _userProfile
 
-  val authenticationState = firebaseUserLiveData.map { user ->
-    if ( user != null ) { firebaseUser.value = user }
-    return@map user
+  init {
+    viewModelScope.launch {
+      _userProfile.value = FirebaseUserService.getUser()
+    }
   }
 
 }
