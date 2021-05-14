@@ -12,14 +12,14 @@ import com.soyaaroncervantes.calmvet.models.pets.Animal
 import kotlinx.coroutines.tasks.await
 
 object FirebaseUserService {
-  private const val TAG = "[Firebase Pet Service]"
+  private const val TAG = "[Firebase User Service]"
 
   suspend fun getUser( ): FirebaseUser? {
     val auth = FirebaseAuth.getInstance()
     return try {
       auth.currentUser
     } catch (e: Exception) {
-      Log.e("[ Error getting current user ]", "${e.message}")
+      Log.e(TAG, "${e.message}")
       null
     }
   }

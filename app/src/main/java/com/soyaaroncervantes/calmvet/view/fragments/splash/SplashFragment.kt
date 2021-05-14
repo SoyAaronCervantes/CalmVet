@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
@@ -17,7 +17,7 @@ import com.firebase.ui.auth.IdpResponse
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentSplashBinding
 import com.soyaaroncervantes.calmvet.services.FirebaseSignInService
-import com.soyaaroncervantes.calmvet.viewmodel.LoginViewModel
+import com.soyaaroncervantes.calmvet.viewmodel.UserViewModel
 
 class SplashFragment : Fragment() {
   // Binding
@@ -28,7 +28,7 @@ class SplashFragment : Fragment() {
   private val firebaseUI = AuthUI.getInstance()
 
   // ViewModels
-  private lateinit var loginViewModel: LoginViewModel
+  private val userViewModel: UserViewModel by activityViewModels()
 
   // Content from Login
   private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -39,7 +39,6 @@ class SplashFragment : Fragment() {
   override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View {
     binding = FragmentSplashBinding.inflate( inflater, container, false )
 
-    loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
     FirebaseSignInService.launchFirebaseUISignIn(getContent)
 
     return binding.root
@@ -54,7 +53,7 @@ class SplashFragment : Fragment() {
 
     // If result code is ok, we get currentUser
     if (result.resultCode == Activity.RESULT_OK) {
-      loginViewModel
+      userViewModel
     }
 
   }

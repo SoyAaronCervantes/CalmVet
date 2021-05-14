@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.soyaaroncervantes.calmvet.databinding.FragmentPetsBinding
+import com.soyaaroncervantes.calmvet.viewmodel.PetsViewModel
 import com.soyaaroncervantes.calmvet.viewmodel.ToolbarViewModel
 
 class PetsFragment : Fragment() {
   // Binding
   private lateinit var binding: FragmentPetsBinding
   private val toolbarViewModel: ToolbarViewModel by activityViewModels()
+  private val petsViewModel: PetsViewModel by activityViewModels()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentPetsBinding.inflate(inflater, container, false)
@@ -29,6 +31,11 @@ class PetsFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     val recyclerView = binding.recyclerViewPets
     recyclerView.apply { layoutManager = LinearLayoutManager(view.context) }
+
+    petsViewModel.pets.observe( viewLifecycleOwner ) {
+      val list = it
+    }
+
   }
 
 }
