@@ -6,25 +6,30 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.soyaaroncervantes.calmvet.enums.FirestoreCollection
 import com.soyaaroncervantes.calmvet.models.pets.Animal
+import com.soyaaroncervantes.calmvet.models.pets.Animal.Companion.toAnimal
 import kotlinx.coroutines.tasks.await
 import java.util.*
 
-object FirebasePetService {
+object FirebasePetsService {
   private const val TAG = "[Firebase Pet Service]"
 
-  suspend fun getPets(): QuerySnapshot? {
+  suspend fun getPets(): List<Animal> {
     val db = FirebaseFirestore.getInstance()
     return try {
       db
         .collection(FirestoreCollection.PETS.toString())
         .get()
         .await()
+        .documents
+        .mapNotNull {
+          it.toAnimal()
+        }
     } catch (e: Exception) {
       Log.e(TAG, "${e.message}")
-      null
+      emptyList()
     }
   }
-  suspend fun getPetsFromUser( user: FirebaseUser ): QuerySnapshot?  {
+  suspend fun getPetsFromUser( user: FirebaseUser ): List<Animal> {
     val db = FirebaseFirestore.getInstance()
     return try {
       db
@@ -32,9 +37,13 @@ object FirebasePetService {
         .whereEqualTo("createdBy", user.uid )
         .get()
         .await()
+        .documents
+        .mapNotNull {
+          it.toAnimal()
+        }
     } catch (e: Exception) {
       Log.e(TAG, "${e.message}")
-      null
+      emptyList()
     }
   }
 

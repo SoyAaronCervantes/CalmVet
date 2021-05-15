@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.soyaaroncervantes.calmvet.R
-import com.soyaaroncervantes.calmvet.adapter.ViewPagerAdapter
+import com.soyaaroncervantes.calmvet.view.adapter.ViewPagerAdapter
 import com.soyaaroncervantes.calmvet.databinding.FragmentViewPagerBinding
 import com.soyaaroncervantes.calmvet.databinding.TablayoutBinding
 import com.soyaaroncervantes.calmvet.databinding.ToolbarBinding

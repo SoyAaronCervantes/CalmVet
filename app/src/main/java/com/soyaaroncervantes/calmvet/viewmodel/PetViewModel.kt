@@ -1,16 +1,17 @@
 package com.soyaaroncervantes.calmvet.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 import com.soyaaroncervantes.calmvet.models.pets.Animal
-import com.soyaaroncervantes.calmvet.services.FirebasePetService
-import com.soyaaroncervantes.calmvet.services.ToastManager
+import com.soyaaroncervantes.calmvet.services.FirebasePetsService
+import com.soyaaroncervantes.calmvet.services.FirebasePetsStorage
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
+import java.io.File
+import java.io.FileInputStream
 
 class PetViewModel : ViewModel() {
   private val mutableAnimal = MutableLiveData<Animal>()
@@ -24,10 +25,15 @@ class PetViewModel : ViewModel() {
     return arrayListOf("Perro", "Gato", "Cuyo", "Hurón", "Conejo", "Pato")
   }
 
-  fun addPet(animal: Animal, user: FirebaseUser ) {
+  fun addPet(animal: Animal, user: FirebaseUser) {
     viewModelScope.launch {
-      FirebasePetService.addPet( animal, user )
+      Log.d(TAG, "${user.uid}: $animal")
+      FirebasePetsService.addPet(animal, user)
+      FirebasePetsStorage.addPhoto(animal, user)
     }
   }
 
+  companion object {
+    private const val TAG = "[ Pet ViewModel ]"
+  }
 }

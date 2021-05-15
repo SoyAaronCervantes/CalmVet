@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
 import com.soyaaroncervantes.calmvet.models.pets.Animal
-import com.soyaaroncervantes.calmvet.services.FirebasePetService
+import com.soyaaroncervantes.calmvet.services.FirebasePetsService
 import kotlinx.coroutines.launch
 
 class PetsViewModel: ViewModel() {
@@ -22,8 +22,8 @@ class PetsViewModel: ViewModel() {
   init {
     viewModelScope.launch {
       _user.value = UserViewModel().userProfile.value
-      _pets.value = FirebasePetService.getPets()?.toObjects(Animal::class.java)
-      _pets.value  = user.value?.let { FirebasePetService.getPetsFromUser(it)?.toObjects( Animal::class.java ) }
+      _pets.value = FirebasePetsService.getPets()
+      _pets.value  = user.value?.let { FirebasePetsService.getPetsFromUser(it) }
     }
   }
 
