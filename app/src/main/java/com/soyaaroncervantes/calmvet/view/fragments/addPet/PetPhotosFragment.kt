@@ -115,10 +115,10 @@ class PetPhotosFragment : Fragment() {
       override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
         val savedURI = Uri.fromFile(photoFile)
         animal.headerPhoto = savedURI
-        petViewModel.addPet( animal, user )
+        petViewModel.addPet(animal, user)
 
         ToastManager.displayToast(requireContext(), "Adding pet")
-        findNavController().navigate( R.id.action_petPhotosFragment_to_viewPagerFragment )
+        findNavController().navigate(R.id.action_petPhotosFragment_to_viewPagerFragment)
         Log.d(TAG, "Photo saved: $savedURI")
       }
     })
