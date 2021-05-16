@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
@@ -17,6 +19,7 @@ import com.firebase.ui.auth.IdpResponse
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentSplashBinding
 import com.soyaaroncervantes.calmvet.services.FirebaseSignInService
+import com.soyaaroncervantes.calmvet.viewmodel.PetsViewModel
 import com.soyaaroncervantes.calmvet.viewmodel.UserViewModel
 
 class SplashFragment : Fragment() {
@@ -27,14 +30,8 @@ class SplashFragment : Fragment() {
   private lateinit var firebaseUISignIn: FirebaseSignInService
   private val firebaseUI = AuthUI.getInstance()
 
-  // ViewModels
-  private val userViewModel: UserViewModel by activityViewModels()
-
   // Content from Login
-  private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-    validateResult(it)
-    findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
-  }
+  private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { validateResult(it) }
 
   override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View {
     binding = FragmentSplashBinding.inflate( inflater, container, false )
@@ -50,12 +47,7 @@ class SplashFragment : Fragment() {
     val response = IdpResponse.fromResultIntent(result.data)
     val responseIsValidated = validateResponse(response)
     if (!responseIsValidated) { return }
-
-    // If result code is ok, we get currentUser
-    if (result.resultCode == Activity.RESULT_OK) {
-      userViewModel
-    }
-
+    findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
   }
   private fun validateResponse(response: IdpResponse?): Boolean {
 
