@@ -1,5 +1,6 @@
 package com.soyaaroncervantes.calmvet.viewmodel
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,7 +30,14 @@ class PetViewModel : ViewModel() {
     viewModelScope.launch {
       Log.d(TAG, "${user.uid}: $animal")
       FirebasePetsService.addPet(animal, user)
-      FirebasePetsStorage.addPhoto(animal, user)
+    }
+  }
+
+  fun addPet( animal: Animal, user: FirebaseUser, file: File ) {
+    viewModelScope.launch {
+      Log.d(TAG, "${user.uid}: $animal")
+      FirebasePetsService.addPet(animal, user)
+      FirebasePetsStorage.addPhoto(animal, user, file )
     }
   }
 

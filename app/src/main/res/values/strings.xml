@@ -23,7 +23,7 @@
   <string name="content_description_signout">Cerrarás tu sesión y regresarás a la página de Iniciar Sesión</string>
 
   <string name="petName_input">Nombre de la mascota</string>
-  <string name="petDescription_input">Cuentanos, ¿Por qué lo hace tan especial?</string>
+  <string name="petDescription_input">Cuentanos, ¿Qué lo hace tan especial?</string>
   <string name="petAnimal_Input">¿Qué animal es?</string>
   <string name="petAnimal_input">¿Que animal es?</string>
   <string name="petBreed_input">¿Que raza es?</string>

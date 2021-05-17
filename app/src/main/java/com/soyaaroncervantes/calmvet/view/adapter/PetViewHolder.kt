@@ -9,8 +9,8 @@ import com.soyaaroncervantes.calmvet.databinding.ListItemBinding
 import com.soyaaroncervantes.calmvet.models.pets.Animal
 
 class PetViewHolder( view: View ): RecyclerView.ViewHolder( view ) {
-  var petPhoto: ImageView = view.findViewById( R.id.petImage )
-  var petName: TextView = view.findViewById( R.id.petName )
-  var petAge: TextView = view.findViewById( R.id.petAge )
-  var petDescription: TextView = view.findViewById( R.id.petDescription )
+  var image: ImageView = view.findViewById( R.id.petImage )
+  var name: TextView = view.findViewById( R.id.petName )
+  var animal: TextView = view.findViewById( R.id.petAnimal )
+  var description: TextView = view.findViewById( R.id.petDescription )
 }

@@ -40,7 +40,7 @@
           android:textAppearance="?attr/textAppearanceHeadline6" />
 
         <TextView
-          android:id="@+id/petAge"
+          android:id="@+id/petAnimal"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
@@ -80,8 +80,8 @@
           android:orientation="vertical">
 
           <Button
-            android:id="@+id/addToFavorite"
             style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+            android:id="@+id/addToFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_favorite_border"

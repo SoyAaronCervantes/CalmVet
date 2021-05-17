@@ -1,11 +1,13 @@
 package com.soyaaroncervantes.calmvet.services
 
+import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.soyaaroncervantes.calmvet.models.pets.Animal
 import kotlinx.coroutines.tasks.await
+import java.io.File
 import java.io.FileInputStream
 
 object FirebasePetsStorage {
@@ -13,7 +15,7 @@ object FirebasePetsStorage {
   private const val PATH_PREFIX = "images/users"
   private const val PETS = "pets"
 
-  suspend fun addPhoto(animal: Animal, user: FirebaseUser): UploadTask.TaskSnapshot? {
+  suspend fun addPhoto( animal: Animal, user: FirebaseUser, file: File ): UploadTask.TaskSnapshot? {
 
     val storage = FirebaseStorage.getInstance()
     val storageRef = storage.reference
@@ -24,7 +26,7 @@ object FirebasePetsStorage {
     return try {
 
       imageRef
-        .putFile( animal.headerPhoto )
+        .putFile( Uri.fromFile( file ) )
         .await()
 
     } catch (e: Exception) {

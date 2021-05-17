@@ -14,7 +14,7 @@ import kotlinx.coroutines.tasks.await
 object FirebaseUserService {
   private const val TAG = "[Firebase User Service]"
 
-  suspend fun getUser( ): FirebaseUser? {
+  suspend fun getUser(): FirebaseUser? {
     val auth = FirebaseAuth.getInstance()
     return try {
       auth.currentUser
