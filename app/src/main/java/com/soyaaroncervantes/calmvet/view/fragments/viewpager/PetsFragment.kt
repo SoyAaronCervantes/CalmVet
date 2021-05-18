@@ -5,19 +5,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.soyaaroncervantes.calmvet.databinding.FragmentPetsBinding
+import com.soyaaroncervantes.calmvet.view.adapter.PetsAdapter
+import com.soyaaroncervantes.calmvet.viewmodel.PetsViewModel
 import com.soyaaroncervantes.calmvet.viewmodel.ToolbarViewModel
 
 class PetsFragment : Fragment() {
-  // Binding
-  private lateinit var binding: FragmentPetsBinding
-  private val toolbarViewModel: ToolbarViewModel by activityViewModels()
+  /* #Binding */
+  private lateinit var binding: FragmentPetsBinding;
+
+  /* #ViewModel */
+  private val toolbarViewModel: ToolbarViewModel by viewModels()
+  private val petsViewModel: PetsViewModel by viewModels()
+
+  /* #Adapter */
+  private var petsAdapter: PetsAdapter? = null
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentPetsBinding.inflate(inflater, container, false)
+    setupRecyclerView()
     return binding.root
+  }
+
+  override fun onStart() {
+    super.onStart()
+    petsAdapter?.startListening()
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    petsAdapter?.stopListening()
   }
 
   override fun onResume() {
@@ -25,10 +44,13 @@ class PetsFragment : Fragment() {
     toolbarViewModel.setTitle("Mascotas")
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+  private fun setupRecyclerView() {
     val recyclerView = binding.recyclerViewPets
-    recyclerView.apply { layoutManager = LinearLayoutManager(view.context) }
+    val firestoreRecyclerOptions = petsViewModel.pets()
+    petsAdapter = PetsAdapter(firestoreRecyclerOptions)
+    recyclerView.layoutManager = LinearLayoutManager(this.context)
+    recyclerView.adapter = petsAdapter
+    binding.relativeLayoutPets.visibility = View.INVISIBLE
   }
 
 }

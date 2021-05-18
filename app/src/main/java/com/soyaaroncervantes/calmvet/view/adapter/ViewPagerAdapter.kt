@@ -1,4 +1,4 @@
-package com.soyaaroncervantes.calmvet.adapter
+package com.soyaaroncervantes.calmvet.view.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

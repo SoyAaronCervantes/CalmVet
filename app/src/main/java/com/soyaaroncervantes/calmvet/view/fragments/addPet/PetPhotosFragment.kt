@@ -19,12 +19,15 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseUser
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.databinding.FragmentPetPhotosBinding
 import com.soyaaroncervantes.calmvet.models.pets.Animal
 import com.soyaaroncervantes.calmvet.services.ToastManager
 import com.soyaaroncervantes.calmvet.viewmodel.PetViewModel
 import com.soyaaroncervantes.calmvet.viewmodel.ToolbarViewModel
+import com.soyaaroncervantes.calmvet.viewmodel.UserViewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,7 +37,10 @@ import java.util.concurrent.Executors
 class PetPhotosFragment : Fragment() {
   private lateinit var binding: FragmentPetPhotosBinding
   private lateinit var animal: Animal
+  private lateinit var user: FirebaseUser
+
   private val petViewModel: PetViewModel by activityViewModels()
+  private val userViewModel: UserViewModel by activityViewModels()
   private val toolBarViewModel: ToolbarViewModel by activityViewModels()
 
   private var imageCapture: ImageCapture? = null
@@ -64,6 +70,7 @@ class PetPhotosFragment : Fragment() {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentPetPhotosBinding.inflate(inflater, container, false)
     petViewModel.animal.observe(viewLifecycleOwner) { animal = it }
+    userViewModel.userProfile.observe(viewLifecycleOwner) { user = it }
     useCamera()
     return binding.root
   }
@@ -106,16 +113,18 @@ class PetPhotosFragment : Fragment() {
       }
 
       override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+        petViewModel.addPet( animal, user, photoFile )
+
+        ToastManager.displayToast(requireContext(), "Adding pet")
+        findNavController().navigate(R.id.action_petPhotosFragment_to_viewPagerFragment)
+
         val savedURI = Uri.fromFile(photoFile)
-        val msg = "Photo capture succeeded: $savedURI"
-        animal.headerPhoto = savedURI
-        petViewModel.setAnimal( animal );
-        petViewModel.save( animal )
-        ToastManager.displayToast(requireContext(), msg)
-        Log.d(TAG, msg)
-        Log.d(TAG, animal.toString())
+        Log.d(TAG, "Photo saved: $savedURI")
+
       }
+
     })
+
   }
 
   private fun getOutputDirectory(): File {

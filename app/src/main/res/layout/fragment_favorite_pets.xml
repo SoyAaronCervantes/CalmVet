@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context=".view.fragments.viewpager.FavoritePetsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools">
 
-  <!-- TODO: Update blank fragment layout -->
-  <TextView
+  <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="@string/hello_blank_fragment" />
+    tools:context=".view.fragments.viewpager.FavoritePetsFragment">
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recyclerViewPets"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="20dp" />
+
+    <RelativeLayout
+      android:id="@+id/relativeLayoutPets"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:orientation="vertical">
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.4"
+        android:background="@color/gray_800" />
+
+      <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+  </FrameLayout>
+
+</layout>
