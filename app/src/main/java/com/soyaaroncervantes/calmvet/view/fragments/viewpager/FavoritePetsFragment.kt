@@ -16,16 +16,18 @@ import com.soyaaroncervantes.calmvet.viewmodel.UserViewModel
 class FavoritePetsFragment : Fragment() {
   /* #Binding */
   private lateinit var binding: FragmentFavoritePetsBinding
+
   /* #ViewModel */
   private val toolbarViewModel: ToolbarViewModel by viewModels()
   private val userViewModel: UserViewModel by viewModels()
   private val petsViewModel: PetsViewModel by viewModels()
+
   /* #Adapter */
   private var petsAdapter: PetsAdapter? = null
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     binding = FragmentFavoritePetsBinding.inflate(inflater, container, false)
-    setupRecyclerView()
+    setupAdapter()
     return binding.root
   }
 
@@ -44,13 +46,19 @@ class FavoritePetsFragment : Fragment() {
     toolbarViewModel.setTitle("Mascotas")
   }
 
-  private fun setupRecyclerView() {
-    val user = userViewModel.userProfile.value
+  private fun setupAdapter() {
+    val user = userViewModel.userProfile.value!!
+    val firestoreRecyclerOptions = petsViewModel.pets( user )
+    petsAdapter = PetsAdapter( firestoreRecyclerOptions )
     val recyclerView = binding.recyclerViewPets
-    val firestoreRecyclerOptions = user?.let { petsViewModel.pets(it) }
-    petsAdapter = firestoreRecyclerOptions?.let { PetsAdapter(it) }
     recyclerView.layoutManager = LinearLayoutManager(this.context)
     recyclerView.adapter = petsAdapter
+
     binding.relativeLayoutPets.visibility = View.INVISIBLE
   }
+
+  companion object {
+    private const val TAG = "[Favorite Pets Fragment]"
+  }
+
 }

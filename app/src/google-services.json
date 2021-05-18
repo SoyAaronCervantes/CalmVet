@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "289797419410-p8jr58b1i1a2pe0i7nvljmd8k5a4saco.apps.googleusercontent.com",
+          "client_id": "289797419410-4i9ot6kdm4b4teufi4hlft6e57cenvrr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.soyaaroncervantes.calmvet",
@@ -37,6 +37,13 @@
             {
               "client_id": "289797419410-3n83qin3enofntr0coetkt9mt1r2luj1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "289797419410-fa754abn6q0i4mtr1u5fjdloe2uc4qai.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.soyaaroncervantes.CalmVet"
+              }
             }
           ]
         }

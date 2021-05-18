@@ -2,6 +2,7 @@ package com.soyaaroncervantes.calmvet.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.firebase.storage.FirebaseStorage
 
 import com.soyaaroncervantes.calmvet.databinding.ActivityMainBinding
 
@@ -12,7 +13,6 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivityMainBinding.inflate( layoutInflater )
     setContentView(binding.root)
-
   }
 
 

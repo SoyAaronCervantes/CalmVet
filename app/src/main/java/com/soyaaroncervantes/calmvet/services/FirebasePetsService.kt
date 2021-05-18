@@ -3,8 +3,12 @@ package com.soyaaroncervantes.calmvet.services
 import android.util.Log
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ListResult
+import com.google.firebase.storage.StorageReference
 import com.soyaaroncervantes.calmvet.enums.FirestoreCollection
 import com.soyaaroncervantes.calmvet.models.pets.Animal
 import kotlinx.coroutines.tasks.await
@@ -14,20 +18,18 @@ object FirebasePetsService {
 
   fun getPets(): FirestoreRecyclerOptions<Animal> {
 
-    val db = FirebaseFirestore.getInstance()
-    val collection = db.collection(FirestoreCollection.PETS.toString())
-    val querySnapshot: Query = collection
+    val querySnapshot: Query = getCollection( FirestoreCollection.PETS.toString() )
+
     return FirestoreRecyclerOptions
       .Builder<Animal>()
       .setQuery(querySnapshot, Animal::class.java)
       .build()
 
   }
-
   fun getPets(user: FirebaseUser): FirestoreRecyclerOptions<Animal> {
-    val db = FirebaseFirestore.getInstance()
-    val collection = db.collection(FirestoreCollection.PETS.toString())
+    val collection = getCollection( FirestoreCollection.PETS.toString() )
     val querySnapshot: Query = collection.whereEqualTo("createdBy", user.uid)
+
     return FirestoreRecyclerOptions
       .Builder<Animal>()
       .setQuery(querySnapshot, Animal::class.java)
@@ -35,11 +37,10 @@ object FirebasePetsService {
   }
 
   suspend fun addPet(animal: Animal, user: FirebaseUser): Void? {
-    val db = FirebaseFirestore.getInstance()
-    val collectionReference = db.collection(FirestoreCollection.PETS.toString())
+    val collection = getCollection( FirestoreCollection.PETS.toString() )
     animal.createdBy = user.uid
     return try {
-      collectionReference
+      collection
         .document(animal.id!!)
         .set(animal)
         .await()
@@ -49,4 +50,8 @@ object FirebasePetsService {
     }
   }
 
+  private fun getCollection( collectionName: String ): CollectionReference {
+    val db = FirebaseFirestore.getInstance()
+    return db.collection( collectionName )
+  }
 }
