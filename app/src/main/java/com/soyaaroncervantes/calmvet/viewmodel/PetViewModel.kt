@@ -28,16 +28,17 @@ class PetViewModel : ViewModel() {
 
   fun addPet(animal: Animal, user: FirebaseUser) {
     viewModelScope.launch {
-      Log.d(TAG, "${user.uid}: $animal")
+      Log.d("$TAG - Add Pet", "${user.uid}: $animal")
       FirebasePetsService.addPet(animal, user)
     }
   }
 
   fun addPet( animal: Animal, user: FirebaseUser, file: File ) {
     viewModelScope.launch {
-      Log.d(TAG, "${user.uid}: $animal")
+      Log.d("$TAG - Add Pet & Photo", "${user.uid}: $animal")
+
       FirebasePetsService.addPet(animal, user)
-      FirebasePetsStorage.addPhoto(animal, user, file )
+      FirebasePetsStorage.addPhoto(animal, file )
     }
   }
 

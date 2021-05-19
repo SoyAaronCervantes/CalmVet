@@ -12,15 +12,14 @@ import java.io.FileInputStream
 
 object FirebasePetsStorage {
   private const val TAG = "[Firebase Storage Pet Service]"
-  private const val PATH_PREFIX = "images/users"
-  private const val PETS = "pets"
+  private const val PATH_PREFIX = "images/pets"
 
-  suspend fun addPhoto( animal: Animal, user: FirebaseUser, file: File ): UploadTask.TaskSnapshot? {
+  suspend fun addPhoto( animal: Animal, file: File ): UploadTask.TaskSnapshot? {
 
     val storage = FirebaseStorage.getInstance()
     val storageRef = storage.reference
 
-    val path = "$PATH_PREFIX/${ user.uid }/$PETS/${animal.id}"
+    val path = "$PATH_PREFIX/${animal.id}"
     val imageRef = storageRef.child(path)
 
     return try {
