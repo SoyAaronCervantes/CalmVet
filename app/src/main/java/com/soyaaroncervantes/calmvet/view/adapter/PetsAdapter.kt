@@ -1,6 +1,5 @@
 package com.soyaaroncervantes.calmvet.view.adapter
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -8,7 +7,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.soyaaroncervantes.calmvet.R
 import com.soyaaroncervantes.calmvet.models.pets.Animal
-import com.soyaaroncervantes.calmvet.modules.GlideApp
 
 class PetsAdapter(options: FirestoreRecyclerOptions<Animal>) : FirestoreRecyclerAdapter<Animal, PetViewHolder>(options) {
 
@@ -24,10 +22,6 @@ class PetsAdapter(options: FirestoreRecyclerOptions<Animal>) : FirestoreRecycler
     val storageRef = storage.getReferenceFromUrl("gs://calmvet-project.appspot.com");
     val imageReference = storageRef.child("/images/users/${model.createdBy}/pets/${model.id}.jpg")
 
-    GlideApp
-      .with(holder.context)
-      .load(imageReference)
-      .into(holder.image)
   }
 
   companion object {
