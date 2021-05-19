@@ -10,8 +10,9 @@ import com.google.firebase.storage.StorageReference
 import java.io.InputStream
 
 @GlideModule
-class CalmVetGlideModule : AppGlideModule() {
+class CalmVetGlideModule: AppGlideModule() {
   override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
+    super.registerComponents(context, glide, registry)
     registry.append(StorageReference::class.java, InputStream::class.java, FirebaseImageLoader.Factory())
   }
 }
